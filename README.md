@@ -1,1 +1,1 @@
-# Curriculum-design-of-data-structure.iml
+# Curriculum-design-of-data-structure
