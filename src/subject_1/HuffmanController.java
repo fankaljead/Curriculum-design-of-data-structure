@@ -55,8 +55,9 @@ public class HuffmanController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bindHboxEvents();
-        bindBtInitialEvents();
-        bindBtCodeEvents();
+        bindBtInitialEvents();//初始化
+        bindBtCodeEvents();//编码
+        bindBtDecodeEvents();//解码
     }
 
 
@@ -98,11 +99,12 @@ public class HuffmanController implements Initializable{
         });
     }
 
-
+    //编码功能 将哈夫曼编码存入文件中
     public void bindBtCodeEvents(){
         btCode.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                //当内存中不存在时，从文件中读取创建哈夫曼树
                 if(huffman == null){
                     try {
                         huffman = fileInOut.readObjectFromFile("hfmtree.dat");
@@ -117,6 +119,29 @@ public class HuffmanController implements Initializable{
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+    }
+
+
+    //解码功能 利用已经建立好的哈夫曼树将codefile.txt中的文件解码
+    public void bindBtDecodeEvents(){
+        btDecode.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //当内存中不存在时，从文件中读取创建哈夫曼树
+                if(huffman == null){
+                    try {
+                        huffman = fileInOut.readObjectFromFile("hfmtree.dat");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("IOException");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                String temp = "";
             }
         });
     }
