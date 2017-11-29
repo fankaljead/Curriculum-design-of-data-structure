@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Time: 2017/11/29 11:08
  * Description: 文件输入输出类
  */
-public class FileInOut<E> {
+public class FileInOut<E> implements Serializable{
 
     /** 输出到文件 **/
     public void writeToFile(String fileName, String text) throws FileNotFoundException {
@@ -35,7 +35,7 @@ public class FileInOut<E> {
      */
     public void writeObjectToFile(E e, String fileName) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
-        out.writeObject(e);
+        out.writeObject((Object) e);
         out.close();
     }
 

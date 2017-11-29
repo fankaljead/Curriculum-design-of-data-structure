@@ -1,9 +1,13 @@
 package subject_1;
 
+import com.jfoenix.controls.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -17,6 +21,7 @@ public class HuffmanMain extends Application{
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("HuffmanView.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("HuffmanStyle.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Huffman");

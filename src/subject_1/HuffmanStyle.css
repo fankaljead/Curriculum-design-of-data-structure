@@ -1,0 +1,30 @@
+.button{
+    -fx-padding: 0.7em 0.57em;
+    -fx-start-margin: 0.7em 0.57em;
+    -fx-font-size:40px;
+    -jfx-button-type: RAISED;
+    -fx-background-color: rgb(77,102,204);
+    -fx-pref-width: 300px;
+    -fx-pref-height: 300px;
+    -fx-text-fill: WHITE;
+    -fx-font-family: serif;
+
+}
+.buttonTotal{
+    -fx-end-margin: 100px;
+    margin: auto;
+    padding: auto;
+}
+
+.pane{
+    -fx-spacing: 20px;
+}
+#btInitial{
+    -fx-start-margin: 50px;
+}
+
+#textArea{
+    /*-fx-pref-height: 400px;*/
+    /*-fx-pref-width: 100px;*/
+
+}

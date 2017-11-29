@@ -6,9 +6,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="subject_1.HuffmanController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import com.jfoenix.controls.*?>
 
-</AnchorPane>
+<!--哈夫曼编码视图-->
+
+<BorderPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="subject_1.HuffmanController"
+      prefHeight="400.0" prefWidth="1700.0"
+      stylesheets="@HuffmanStyle.css"
+      styleClass="pane"
+      fx:id="pane">
+      <top>
+          <HBox styleClass="buttonTotal" fx:id="hbox" spacing="50">
+              <JFXButton fx:id="btInitial" text="初始化" styleClass="button" />
+              <JFXButton fx:id="btCode" text="编码" styleClass="button"/>
+              <JFXButton fx:id="btDecode" text="解码" styleClass="button"/>
+              <JFXButton fx:id="btPrint" text="打印代码" styleClass="button"/>
+              <JFXButton fx:id="btPrintTree" text="打印哈夫曼树" styleClass="button"/>
+          </HBox>
+      </top>
+
+      <center>
+          <JFXTextArea fx:id="textArea" />
+
+      </center>
+
+</BorderPane>

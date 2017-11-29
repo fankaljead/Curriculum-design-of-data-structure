@@ -1,8 +1,8 @@
 package subject_1;
 
 import util.heap.Heap;
-import util.tree.BinaryTree;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Time: 2017/11/27 17:10
  * Description: 哈夫曼编码
  */
-public class Huffman {
+public class Huffman implements Serializable { //实现Serializable接口可以使本对象被写如文件
     private String text;//输入的字符串
     private String[] codes;//生成的哈夫曼编码
     private int[] counts;//每个哈夫曼编码的权重
@@ -115,11 +115,17 @@ public class Huffman {
         return counts;
     }
 
-
+    public String getHuffmanCodes() {
+        String temp = "";
+        for (int i = 0; i < text.length(); i++) {
+            temp += codes[(int)(text.charAt(i))];
+        }
+        return temp;
+    }
 
 
     /** 定义一棵哈夫曼编码树 */
-    public class HuffmanTree implements Comparable<HuffmanTree> {
+    public class HuffmanTree implements Comparable<HuffmanTree>, Serializable{
         public TreeNode root; // The root of the tree
 
         /** 通过两棵子树创建一棵树 */
@@ -162,7 +168,7 @@ public class Huffman {
 
         }
 
-        public class TreeNode{
+        public class TreeNode implements Serializable{
             char element; // 存储节点的字符
             int weight; // 存储节点的权重
             TreeNode left; // 左节点
