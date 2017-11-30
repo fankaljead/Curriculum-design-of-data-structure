@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 /**
  * Author: Zhou Xianghui
@@ -24,6 +25,10 @@ import java.util.ResourceBundle;
  */
 public class HuffmanController implements Initializable{
 
+
+    private static String FILE_TO_SAVE_HUFFMAN_CODE = "codefile.txt";//保存编码后的文件名
+    private static String FILE_TO_SAVE_HUFFMAN_CODE_PRINT = "codeprint.txt";//保存打印的哈夫曼编码 每行50个
+    private static String FILE_TO_SAVE_HUFFMAN_OBJECT = "hfmtree.dat";//保存存储哈夫曼对象的文件名
 
     private Huffman huffman;
     private FileInOut<Huffman> fileInOut = new FileInOut<>();
@@ -58,6 +63,7 @@ public class HuffmanController implements Initializable{
         bindBtInitialEvents();//初始化
         bindBtCodeEvents();//编码
         bindBtDecodeEvents();//解码
+        bindBtPrintEvents();//打印哈夫曼编码
     }
 
 
@@ -89,7 +95,7 @@ public class HuffmanController implements Initializable{
                     huffman = new Huffman(textArea.getText());
                     textArea.setText(huffman.getHuffmanCodes());
                     try {
-                        fileInOut.writeObjectToFile(huffman, "hfmtree.dat");
+                        fileInOut.writeObjectToFile(huffman, FILE_TO_SAVE_HUFFMAN_OBJECT);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -107,7 +113,7 @@ public class HuffmanController implements Initializable{
                 //当内存中不存在时，从文件中读取创建哈夫曼树
                 if(huffman == null){
                     try {
-                        huffman = fileInOut.readObjectFromFile("hfmtree.dat");
+                        huffman = fileInOut.readObjectFromFile(FILE_TO_SAVE_HUFFMAN_OBJECT);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {
@@ -115,10 +121,15 @@ public class HuffmanController implements Initializable{
                     }
                 }
                 try {
-                    fileInOut.writeToFile("codefile.txt", huffman.getHuffmanCodes());
+                    fileInOut.writeToFile(FILE_TO_SAVE_HUFFMAN_CODE, huffman.getHuffmanCodes());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+//                for (int i = 0; i < huffman.getCodes().length; i++) {
+//                    if(huffman.getCodes()[i] != null)
+//                        System.out.println((char)i + ": " + huffman.getCodes()[i]);
+//                }
             }
         });
     }
@@ -132,7 +143,7 @@ public class HuffmanController implements Initializable{
                 //当内存中不存在时，从文件中读取创建哈夫曼树
                 if(huffman == null){
                     try {
-                        huffman = fileInOut.readObjectFromFile("hfmtree.dat");
+                        huffman = fileInOut.readObjectFromFile(FILE_TO_SAVE_HUFFMAN_OBJECT);
                     } catch (IOException e) {
                         e.printStackTrace();
                         System.out.println("IOException");
@@ -142,6 +153,60 @@ public class HuffmanController implements Initializable{
                 }
 
                 String temp = "";
+                try {
+                    temp = fileInOut.readFromFile(FILE_TO_SAVE_HUFFMAN_CODE);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                TreeMap<String, Character> treeMap = (TreeMap<String, Character>)huffman.getCodesWithKey().clone();
+
+                //替换每个字符的哈夫曼编码
+               while (!treeMap.isEmpty()){
+                   System.out.println(treeMap.firstKey() + " : " + treeMap.get(treeMap.firstKey()));
+
+                   temp = temp.replaceAll(treeMap.firstKey(), Character.toString(treeMap.get(treeMap.firstKey())));
+                    treeMap.remove(treeMap.firstKey());
+                }
+                System.out.println(temp);
+
+                textArea.setText(temp);
+            }
+        });
+    }
+
+    //打印代码文件 每行打印50个代码 并保存到文件codefile中
+    public void bindBtPrintEvents(){
+        btPrint.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String codes = "";
+                try {
+                    codes = fileInOut.readFromFile(FILE_TO_SAVE_HUFFMAN_CODE);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                String temp = "";
+                for (int i = 0; i < codes.length(); i = i + 50) {
+                    if(i + 50 > codes.length()){
+                        temp += codes.substring(i, codes.length());
+                        temp += "\n";
+                    }
+                    else {
+                        temp += codes.substring(i, i + 50);
+                        temp += "\n";
+
+                    }
+                }
+
+                textArea.setText(temp);
+                try {
+                    fileInOut.writeToFile(FILE_TO_SAVE_HUFFMAN_CODE_PRINT, temp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }

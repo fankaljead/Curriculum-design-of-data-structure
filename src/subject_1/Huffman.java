@@ -4,6 +4,8 @@ import util.heap.Heap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.TreeMap;
 
 /**
  * Author: Zhou Xianghui
@@ -15,6 +17,8 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
     private String[] codes;//生成的哈夫曼编码
     private int[] counts;//每个哈夫曼编码的权重
     private HuffmanTree tree;//生成的哈夫曼树
+    private TreeMap<String, Character> codesWithKey = new TreeMap<>(new CodeComparator());//按照哈夫曼编码的长度依次保存编码及对应字符
+
 
     public Huffman(){
 
@@ -26,6 +30,12 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
         this.counts = getCharacterFrequency(text);
         this.tree = getHuffmanTree(counts); //创建一棵霍夫曼树
         this.codes = getCode(tree.root);
+
+        for (int i = 0; i < codes.length; i++) {
+            if(codes[i] != null)
+                this.codesWithKey.put(codes[i], (char)i);
+        }
+
     }
 
     /** get与 set方法 **/
@@ -62,6 +72,14 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
 
     public void setTree(HuffmanTree tree) {
         this.tree = tree;
+    }
+
+    public TreeMap<String, Character> getCodesWithKey() {
+        return codesWithKey;
+    }
+
+    public void setCodesWithKey(TreeMap<String, Character> codesWithKey) {
+        this.codesWithKey = codesWithKey;
     }
 
     //获取哈夫曼编码
@@ -185,5 +203,26 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
                 this.element = element;
             }
         }
+    }
+
+
+    public class CodeComparator implements Comparator<String> , Serializable{
+
+        @Override
+        public int compare(String s, String t1) {
+            if(s.length() > t1.length())
+                return -1;
+            else if(s.length() == t1.length()){
+                if(s.compareTo(t1) > 0)
+                    return -1;
+                else if(s.compareTo(t1) == 0)
+                    return 0;
+                else
+                    return 1;
+            }
+            else
+                return 1;
+        }
+
     }
 }
