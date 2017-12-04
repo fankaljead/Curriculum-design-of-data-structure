@@ -2,13 +2,14 @@ package subject_1;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import util.tree.HuffmanCode;
 
-import java.util.ArrayList;
 
 /**
  * Author: Zhou Xianghui
@@ -18,20 +19,22 @@ import java.util.ArrayList;
 public class DrawHuffmanCode extends Application{
 
     private Pane pane = new Pane();
-    private Scene scene = new Scene(pane, 1000, 1000);
+    private Scene scene = new Scene(pane, 1920, 1080);
     private Huffman huffman = new Huffman("the process");
+    private final int X = 960;
+    private final int Y = 100;
+    public final int RADIUS = 50;
+
+    public DrawHuffmanCode(Huffman huffman) {
+        this.huffman = huffman;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        PaintHuffmanNode p1 = new PaintHuffmanNode(500, 100);
-        huffman.getTree();
 
-
-
-        pane.getChildren().add(p1.circle);
-
-
+        preorder(huffman.getTree().root);
+        primaryStage.setTitle("打印哈夫曼树");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -39,61 +42,46 @@ public class DrawHuffmanCode extends Application{
 
     //前序遍历
     public void preorder(Huffman.HuffmanTree.TreeNode root){
-        preorder(root);
+        preorder(root, X, Y);
     }
 
-    public void preorder(Huffman.HuffmanTree.TreeNode root, ArrayList<Character> temp){
+    public void preorder(Huffman.HuffmanTree.TreeNode root, int x, int y){
         if(root == null){
             return;
         }
-        System.out.print(root.element + " ");
 
+        //添加root左边的边
         if(root.left != null){
+            pane.getChildren().add(new Line(x - 2*RADIUS + RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x + RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画左边的线
+            pane.getChildren().add(new Text(x - RADIUS, y + RADIUS, "0"));
+        }
+
+        //添加root👉边的边
+        if(root.right != null){
+            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
+            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
 
         }
 
-        temp.add(root.element);
+        //添加root元素，一个圆形包含字符
+        if(root != null){
+            Circle c = new Circle(x, y, RADIUS);
+            c.setFill(Color.WHITE);
+            c.setStroke(Color.BLACK);
+            pane.getChildren().add(c);//画右边的线
+            String temp;
+            if(root.element == '\0'){
+                temp = root.weight + "";
+            }
+            else {
+                temp = root.element + "";
+            }
 
-        preorder(root.left, temp);
-        preorder(root.right, temp);
+            pane.getChildren().add(new Text(x , y , temp));
 
-    }
+            preorder(root.left, x - 2*RADIUS, y + 2*RADIUS);//
+            preorder(root.right, x + 2*RADIUS, y + 2*RADIUS);
 
-    // Inner class PaintTree for displaying a tree on a panel
-    class PaintHuffmanNode{
-        private int x;
-        private int y;
-        public final int RADIUS = 50;
-        public Circle circle;
-
-        public int getX() {
-            return x;
-        }
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
-
-        public Circle getCircle() {
-            return circle;
-        }
-
-        public void setCircle(Circle circle) {
-            this.circle = circle;
-        }
-
-        public PaintHuffmanNode(int x, int y) {
-            this.x = x;
-            this.y = y;
-            this.circle = new Circle(x, y, RADIUS);
         }
     }
 }

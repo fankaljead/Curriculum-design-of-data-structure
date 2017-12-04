@@ -81,6 +81,7 @@ public class HuffmanController implements Initializable{
         bindBtDecodeEvents();//解码
         bindBtPrintEvents();//打印哈夫曼编码
         bindFilePickEvents();
+        bindBtPrintTreeEvents();
     }
 
 
@@ -241,6 +242,21 @@ public class HuffmanController implements Initializable{
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+    }
+
+    public void bindBtPrintTreeEvents(){
+        btPrintTree.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                DrawHuffmanCode drawHuffmanCode = new DrawHuffmanCode(huffman);
+                try {
+                    drawHuffmanCode.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
