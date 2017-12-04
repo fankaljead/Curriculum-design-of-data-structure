@@ -1,3 +1,8 @@
+*{
+    /*-fx-background-color: lightcoral;*/
+
+}
+
 .button{
     -fx-padding: 0.7em 0.57em;
     -fx-start-margin: 0.7em 0.57em;
@@ -24,7 +29,8 @@
 }
 
 #textArea{
-    /*-fx-pref-height: 400px;*/
-    /*-fx-pref-width: 100px;*/
+    -fx-pref-height: 400px;
+    -fx-pref-width: 100px;
+    -fx-background-color: lightblue;
 
 }

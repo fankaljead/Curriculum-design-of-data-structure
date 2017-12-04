@@ -6,17 +6,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import util.fileInOut.FileInOut;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Author: Zhou Xianghui
@@ -33,6 +38,10 @@ public class HuffmanController implements Initializable{
     private Huffman huffman;
     private FileInOut<Huffman> fileInOut = new FileInOut<>();
 
+
+
+    @FXML
+    private MenuItem fileOpen;
     @FXML
     private Pane pane;
 
@@ -55,15 +64,23 @@ public class HuffmanController implements Initializable{
     private JFXButton btPrintTree;
 
     @FXML
+    private JFXButton filePick;
+
+    @FXML
     private JFXTextArea textArea;
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         bindHboxEvents();
         bindBtInitialEvents();//初始化
         bindBtCodeEvents();//编码
         bindBtDecodeEvents();//解码
         bindBtPrintEvents();//打印哈夫曼编码
+        bindFilePickEvents();
     }
 
 
@@ -121,15 +138,15 @@ public class HuffmanController implements Initializable{
                     }
                 }
                 try {
+//                    huffman.encode(FILE_TO_SAVE_HUFFMAN_CODE);
                     fileInOut.writeToFile(FILE_TO_SAVE_HUFFMAN_CODE, huffman.getHuffmanCodes());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-//                for (int i = 0; i < huffman.getCodes().length; i++) {
-//                    if(huffman.getCodes()[i] != null)
-//                        System.out.println((char)i + ": " + huffman.getCodes()[i]);
-//                }
+
             }
         });
     }
@@ -159,17 +176,12 @@ public class HuffmanController implements Initializable{
                     e.printStackTrace();
                 }
 
-                TreeMap<String, Character> treeMap = (TreeMap<String, Character>)huffman.getCodesWithKey().clone();
+                //解码并输出到屏幕
+                temp = huffman.decode(new EncodeResult(temp, huffman.getCodesWithKey()));
 
-                //替换每个字符的哈夫曼编码
-               while (!treeMap.isEmpty()){
-                   System.out.println(treeMap.firstKey() + " : " + treeMap.get(treeMap.firstKey()));
 
-                   temp = temp.replaceAll(treeMap.firstKey(), Character.toString(treeMap.get(treeMap.firstKey())));
-                    treeMap.remove(treeMap.firstKey());
-                }
                 System.out.println(temp);
-
+                System.out.println(temp);
                 textArea.setText(temp);
             }
         });
@@ -186,7 +198,6 @@ public class HuffmanController implements Initializable{
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-
                 String temp = "";
                 for (int i = 0; i < codes.length(); i = i + 50) {
                     if(i + 50 > codes.length()){
@@ -207,6 +218,29 @@ public class HuffmanController implements Initializable{
                     e.printStackTrace();
                 }
 
+            }
+        });
+    }
+
+
+    public void bindFilePickEvents(){
+        filePick.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("文件选择");
+                FileChooser fileChooser = new FileChooser();//文件选择器
+                fileChooser.setTitle("Open Resource File");
+//                fileChooser.showOpenDialog(filePick.getScene().getWindow());
+
+                File file = fileChooser.showOpenDialog(filePick.getScene().getWindow());//通过按钮获取父stage
+//                System.out.println(file.getPath().replaceAll("\\\\", "\\\\\\\\"));
+
+                try {
+                    huffman = new Huffman(fileInOut.readFromFile(file.getPath()));//有文件创建哈夫曼树获取
+                    System.out.println(huffman.getText());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

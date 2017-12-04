@@ -78,5 +78,32 @@ public class FileInOut<E> implements Serializable{
     }
 
 
+    public String readFromFile(File fileName) throws FileNotFoundException {
+        String temp = "";
+        Scanner in = new Scanner(fileName);
+
+        while (in.hasNext()){
+            temp += in.nextLine();
+        }
+
+        in.close();
+
+        return temp;
+    }
+
+
+    /**
+     * 追加文件：使用FileWriter
+     */
+    public void appendMethodB(String fileName, String content) {
+        try {
+            //打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
