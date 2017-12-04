@@ -1,5 +1,5 @@
 # Curriculum-design-of-data-structure
-[![vfsfdsd](http://read.pudn.com/downloads3/sourcecode/crypt/11271/Huffman/Splsh16__.jpg)] (/tree/master/src/subject_1 "哈夫曼编码")
+[![vfsfdsd](http://read.pudn.com/downloads3/sourcecode/crypt/11271/Huffman/Splsh16__.jpg)](/tree/master/src/subject_1 "哈夫曼编码")
 
 [1 哈夫曼编码 数据的压缩与解压](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_1 "哈夫曼编码")
 ---------------------------
