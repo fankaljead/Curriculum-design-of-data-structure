@@ -19,10 +19,12 @@ import javafx.stage.Stage;
 public class DrawHuffmanCode extends Application{
 
     private Pane pane = new Pane();
-    private Scene scene = new Scene(pane, 1920, 1080);
+    private final int WIDTH = 900;
+    private final int HEIGHT = 700;
+    private Scene scene = new Scene(pane, WIDTH, HEIGHT);
     private Huffman huffman = new Huffman("the process");
-    private final int X = 960;
-    private final int Y = 100;
+    private final int X = WIDTH/2;
+    private final int Y = 50;
     public final int RADIUS = 50;
 
     public DrawHuffmanCode(Huffman huffman) {

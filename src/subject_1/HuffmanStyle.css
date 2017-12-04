@@ -29,8 +29,6 @@
 }
 
 #textArea{
-    -fx-pref-height: 400px;
-    -fx-pref-width: 100px;
     -fx-background-color: lightblue;
 
 }

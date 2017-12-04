@@ -80,8 +80,9 @@ public class HuffmanController implements Initializable{
         bindBtCodeEvents();//编码
         bindBtDecodeEvents();//解码
         bindBtPrintEvents();//打印哈夫曼编码
-        bindFilePickEvents();
-        bindBtPrintTreeEvents();
+        bindFilePickEvents();//文件选择
+        bindBtPrintTreeEvents();//打印哈夫曼树
+        bindTextAreaEvents();//点击输入框
     }
 
 
@@ -177,6 +178,10 @@ public class HuffmanController implements Initializable{
                     e.printStackTrace();
                 }
 
+                if(textArea.getText() != "" || textArea.getText().compareTo("请输入需要解码的字符串") == 0){
+                    temp = textArea.getText();
+                }
+
                 //解码并输出到屏幕
                 temp = huffman.decode(new EncodeResult(temp, huffman.getCodesWithKey()));
 
@@ -260,5 +265,17 @@ public class HuffmanController implements Initializable{
             }
         });
     }
+
+
+    public void bindTextAreaEvents(){
+        textArea.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(textArea.getText().compareTo("") != 0)
+                    textArea.setText("");
+            }
+        });
+    }
+
 
 }

@@ -14,7 +14,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="subject_1.HuffmanController"
-            prefHeight="400.0" prefWidth="1700.0"
+            prefHeight="600.0" prefWidth="1700.0"
             stylesheets="@HuffmanStyle.css"
             styleClass="pane"
             fx:id="pane">
@@ -35,7 +35,7 @@
       </left>
 
       <center>
-          <JFXTextArea fx:id="textArea" promptText="请输入"/>
+          <JFXTextArea fx:id="textArea" promptText="请输入需要解码的字符串"/>
       </center>
 
 
