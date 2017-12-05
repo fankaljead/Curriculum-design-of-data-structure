@@ -69,6 +69,20 @@ public class Calculator {
 
     }
 
+    public static double calculateAnExpression(char[] operators, double[] operands){
+        if(operands.length != operands.length - 1){
+            return 0;
+        }
+
+        double answer = operands[0];
+        for (int i = 0; i < operators.length; i++) {
+            answer = calculateAnOperator(operators[i], operands[i+1], answer);
+            System.out.println("answer:" + answer);
+        }
+
+        return answer;
+    }
+
     /**
      * 计算一个运算符的两个操作数
      * @param op

@@ -58,7 +58,7 @@ public class DrawHuffmanCode extends Application{
             pane.getChildren().add(new Text(x - RADIUS, y + RADIUS, "0"));
         }
 
-        //添加root👉边的边
+        //添加root右边的边
         if(root.right != null){
             pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
             pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));

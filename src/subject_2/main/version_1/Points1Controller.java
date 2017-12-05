@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
  */
 public class Points1Controller implements Initializable {
 
+    private static final String path = "    private static final String path = https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/images/cards";
     @FXML
     private ImageView card1;
 
@@ -36,9 +37,7 @@ public class Points1Controller implements Initializable {
         btStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                File file = new File("K://A.txt");
-//                Image image = new Image("G:\\数据结构课程设计\\Curriculum-design-of-data-structure\\out\\production\\Curriculum-design-of-data-structure\\subject_2\\cards\\1.jpg");
-//                card1.setImage(image);
+
             }
         });
     }
