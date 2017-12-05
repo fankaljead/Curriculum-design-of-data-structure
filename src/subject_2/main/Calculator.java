@@ -18,12 +18,12 @@ public class Calculator {
      */
     public static double calculatePrefix(String expression){
         //创建一个operandStack栈来存储操作数
-        Stack<Double> operandStack
-                = new Stack<>();
+        LinkedList<Double> operandQueue
+                = new LinkedList<>();
 
         //创建一个operatorStack栈来存储操作符
-        Stack<Character> operatorStack
-                = new Stack<>();
+        LinkedList<Character> operatorQueue
+                = new LinkedList<>();
 
         //字符串分解
         StringTokenizer tokens =
@@ -41,27 +41,83 @@ public class Calculator {
             //当操作符为+或者-时
             else if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*' || token.charAt(0) == '/') {
                 //将操作符存入栈中
-                operatorStack.push(token.charAt(0));
+                operatorQueue.offer(token.charAt(0));
 
             }
             //将操作数推入栈
             else {
-                operandStack.push(new Double(token));
+                operandQueue.offer(new Double(token));
             }
 
         }
-
+        System.out.println(operandQueue.toString());
+        System.out.println(operatorQueue.toString());
         //处理最后的操作符，并进行计算
-        while (!operatorStack.isEmpty()) {
-            processAnOperator(operandStack, operatorStack);
+        while (!operatorQueue.isEmpty()) {
+            processAnOperator(operandQueue, operatorQueue);
         }
 
-        System.out.println(operandStack.toString());
-        System.out.println(operatorStack.toString());
+//        double answer = operandQueue.get(0);
+//        for (int i = 0; i < operatorQueue.size(); i++) {
+//            answer = calculateAnOperator(operatorQueue.get(i),operandQueue.get(i+1), answer);
+//            System.out.println("answer:" + answer);
+//        }
+
+
         //返回最后的值
-        return operandStack.pop();
+        return operandQueue.poll();
 
     }
+
+    /**
+     * 计算一个运算符的两个操作数
+     * @param op
+     * @param op1
+     * @param op2
+     * @return
+     */
+    public static double calculateAnOperator(char op, double op1, double op2){
+        if (op == '+') {
+            return (op2 + op1);
+        }
+
+        else if (op == '-') {
+            return (op2 - op1);
+        }
+
+        else if (op == '*') {
+            return (op2 * op1);
+        }
+
+        else if (op == '/') {
+            return (op2 / op1);
+        }
+
+        return 0;
+    }
+
+    private static void processAnOperator(LinkedList<Double> operandQueue, LinkedList<Character> operatorQueue) {
+        char op = operatorQueue.poll();
+        double op2 = operandQueue.poll();
+        double op1 = operandQueue.poll();
+
+        if (op == '+') {
+            operandQueue.addFirst(op2 + op1);
+        }
+
+        else if (op == '-') {
+            operandQueue.addFirst(op2 - op1);
+        }
+
+        else if (op == '*') {
+            operandQueue.addFirst(op2 * op1);
+        }
+
+        else if (op == '/') {
+            operandQueue.addFirst(op2 / op1);
+        }
+    }
+
 
     /**
      * 计算中缀表达式

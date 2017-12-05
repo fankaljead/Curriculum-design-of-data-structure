@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="subject_2.main.version_1.Points1Controller"
+            prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <JFXButton fx:id="btStart" text="开始游戏"/>
+
+    </top>
+    <center>
+        <ImageView fx:id="card1" />
+    </center>
+</BorderPane>
