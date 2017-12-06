@@ -1,7 +1,9 @@
 package subject_2.main.version_1;
 
 import subject_2.main.Calculator;
+import subject_2.main.Changer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +16,14 @@ import java.util.Map;
 public class Points1 {
     private int cardNumber = 4;//纸牌的张数
     private int[] cards = new int[cardNumber];//存储纸牌数字
+    private int[] cardRealNumber = new int[cardNumber];//存储纸牌的文件数字
     private char[] cardsOperator = new char[cardNumber-1];//存储纸牌的操作符
     private int point = 24;//最后凑成的点数
     public static final int NUMBER_OF_TOTAL_CARDS = 52;//纸牌的总张数
     public char[][] operatorsOptions;//操作符的所有选择
     public static final char[] OPERATORS = {'+', '-', '*', '/'};
     public int[][] operandAllOptions;//操作数的所有情况
+    private ArrayList<String> answers = new ArrayList<>();//答案
 
     public char[][] getOperatorsOptions() {
         return operatorsOptions;
@@ -47,6 +51,14 @@ public class Points1 {
         startAGame();
         setOperatorsOptions();
         setOperandAllOptions();
+    }
+
+    public int[] getCardRealNumber() {
+        return cardRealNumber;
+    }
+
+    public void setCardRealNumber(int[] cardRealNumber) {
+        this.cardRealNumber = cardRealNumber;
     }
 
     public int getPoint() {
@@ -93,6 +105,7 @@ public class Points1 {
             int choose = (int)(Math.random() * NUMBER_OF_TOTAL_CARDS);
             if(!isUsed[choose]){
                 cards[usedNumber] = choose/cardNumber + 1;
+                cardRealNumber[usedNumber] = choose + 1;
                 usedNumber++;
                 isUsed[choose] = true;
             }
@@ -105,19 +118,11 @@ public class Points1 {
      * 穷举法找到答案
      * @return
      */
-    public HashMap<char[], int[]> findAnswers() {
-        HashMap<char[], int[]> answers = new HashMap<>();
+    public ArrayList<String> getAnswers() {
         for (int i = 0; i < operatorsOptions.length; i++) {
             for (int j = 0; j < operandAllOptions.length; j++) {
                 if(Calculator.calculateAnExpression(operatorsOptions[i],  operandAllOptions[j]) == point){
-                    for (int k = 0; k < operatorsOptions[i].length; k++) {
-                        System.out.print(operatorsOptions[i][k] + " ");
-                    }
-                    for (int k = 0; k < operandAllOptions[j].length; k++) {
-                        System.out.print(operandAllOptions[j][k] + " ");
-                    }
-                    System.out.println();
-                    answers.put(operatorsOptions[i], operandAllOptions[j]);
+                    answers.add(Changer.changeCharsNumbersToExpression(operatorsOptions[i], operandAllOptions[j]));
                 }
             }
         }
@@ -242,6 +247,37 @@ public class Points1 {
             return false;
         }
 
+        return true;
+    }
+
+
+    /**
+     * 判断输入是否合法
+     * @param in
+     * @return
+     */
+    public boolean isEqualCards(String in){
+        String[] ins = in.split("[()+-/*]");
+        int[] insNumber = new int[cardNumber];
+        int[] temp = cards.clone();
+        Arrays.sort(temp);
+        for (int i = 0 , j = 0; i < ins.length; i++) {
+            if(ins[i].length() != 0){
+
+                insNumber[j++] = Integer.valueOf(ins[i].trim());
+            }
+        }
+
+        Arrays.sort(insNumber);
+
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] == insNumber[i]){
+                continue;
+            }else{
+                return false;
+            }
+
+        }
         return true;
     }
 }

@@ -11,12 +11,27 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="subject_2.main.version_1.Points1Controller"
+            stylesheets="@Point1View.css"
             prefHeight="400.0" prefWidth="600.0">
     <top>
-        <JFXButton fx:id="btStart" text="开始游戏"/>
+        <HBox>
+            <JFXButton fx:id="btStart" text="开始游戏"/>
+            <JFXButton fx:id="btEnd" text="退出" onMouseClicked="#btEndAction"/>
+        </HBox>
 
     </top>
     <center>
-        <ImageView fx:id="card1" />
+        <HBox fx:id="showCards" >
+
+        </HBox>
+
+
     </center>
+    <bottom>
+        <HBox>
+            <TextField fx:id="text" promptText="请输入答案"/>
+            <JFXButton fx:id="btEnter" text="确认" onMouseClicked="#btEnterAction"/>
+        </HBox>
+
+    </bottom>
 </BorderPane>

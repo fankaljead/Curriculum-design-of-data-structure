@@ -22,6 +22,7 @@ public class Points1Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("Points1View.fxml"));
 
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("Point1View.css").toExternalForm());
 
         primaryStage.setTitle("24点游戏");
         primaryStage.setScene(scene);

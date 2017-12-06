@@ -109,20 +109,29 @@ public class Changer {
 
 
 
-    public String changeCharsNumbersToExpression(char[] operators, int[] operands){
+    public static String changeCharsNumbersToExpression(char[] operators, int[] operands){
         String expression = "";//最终的表达式
 
         LinkedList<String> queue = new LinkedList<>();
-
+        queue.offer(operands[0] + " ");
         for (int i = 0; i < operators.length; i++) {
-            if(operators[i] == '+' || operators[i] == '-'){
-                queue.push("(");
-                queue.push(operands[i] +"");
-                queue.push(operators[i] +"");
-                queue.push(operands[i+1] + "");
+            queue.offer(operators[i] + " ");
+            queue.offer(operands[i+1] + " ");
+            if(i != operators.length-1){
+                queue.addFirst("(");
+                queue.addLast(")");
             }
-        }
 
+        }
+        for (int i = 0; i < queue.size(); i++) {
+            expression += queue.get(i);
+        }
         return expression;
+    }
+
+    public static void main(String[] args) {
+        char[] chars = {'+', '-', '*'};
+        int[] ints = {1, 2, 3, 4};
+        System.out.println(changeCharsNumbersToExpression(chars, ints));
     }
 }
