@@ -24,7 +24,7 @@ public class Points1Main extends Application{
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("Point1View.css").toExternalForm());
 
-        primaryStage.setTitle("24点游戏");
+        primaryStage.setTitle("24点游戏V1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -6,12 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.JFXButton?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="subject_2.main.version_1.Points1Controller"
-            stylesheets="@Point1View.css"
+            fx:controller="subject_2.main.version_2.Points2Controller"
             prefHeight="400.0" prefWidth="600.0">
     <top>
         <HBox>
@@ -21,9 +19,20 @@
 
     </top>
     <center>
-        <HBox fx:id="showCards" >
+        <VBox>
+            <HBox fx:id="showCards" >
 
-        </HBox>
+            </HBox>
+            <HBox>
+                <JFXButton fx:id="btFindAnswer" text="查看答案" onMouseClicked="#btFindAnswerAction"/>
+                <JFXButton fx:id="pre" text="上一个" onMouseClicked="#preAction"/>
+                <JFXButton fx:id="next" text="下一个" onMouseClicked="#nextAction"/>
+            </HBox>
+            <HBox>
+                <Label fx:id="answer"/>
+            </HBox>
+        </VBox>
+
 
 
     </center>

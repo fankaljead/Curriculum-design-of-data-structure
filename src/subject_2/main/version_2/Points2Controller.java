@@ -1,28 +1,29 @@
-package subject_2.main.version_1;
-
+package subject_2.main.version_2;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import subject_2.main.Calculator;
+import subject_2.main.version_1.Points1;
 
 import java.net.URL;
+import java.util.AbstractList;
 import java.util.ResourceBundle;
 
 /**
  * Author: Zhou Xianghui
- * Time: 2017/12/5 10:17
+ * Time: 2017/12/6 18:34
  * Description:
  */
-public class Points1Controller implements Initializable {
+public class Points2Controller implements Initializable {
 
     private static final String PATH = "../cards/";
     private static final String SUFFIX = ".jpg";
@@ -32,6 +33,12 @@ public class Points1Controller implements Initializable {
 
     @FXML
     private JFXButton btEnter;
+
+    @FXML
+    private Label answer;
+
+    private int i = 0;
+    private AbstractList<String> answers;
 
     @FXML
     private HBox showCards;
@@ -53,8 +60,10 @@ public class Points1Controller implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 btStart.setText("刷新");
+                answer.setText("");
                 showCards.getChildren().clear();
                 points1 = new Points1();
+                answers = points1.getAnswers();
                 imageView = new ImageView[points1.getCardNumber()];
                 for (int i = 0; i < imageView.length; i++) {
                     imageView[i] = new ImageView();
@@ -82,7 +91,7 @@ public class Points1Controller implements Initializable {
         else {
             String yourAnswerString = text.getText();
             if(points1.isEqualCards(yourAnswerString)){
-                int yourAnswer = (int)Calculator.calculateInfix(yourAnswerString);
+                int yourAnswer = (int) Calculator.calculateInfix(yourAnswerString);
                 if(yourAnswer == points1.getPoint()){
                     text.setText("你的答案正确");
 
@@ -104,6 +113,42 @@ public class Points1Controller implements Initializable {
         btStart.getScene().getWindow().hide();
     }
 
+    @FXML
+    private void btFindAnswerAction(MouseEvent e){
+        if(points1 != null){
+            if(points1.getAnswers().size() == 0){
+                answer.setText("无解");
+            }else {
+                answer.setText(answers.get(0));
+            }
+        }
+    }
+
+    //查看上一个答案
+    @FXML
+    private void preAction(MouseEvent e){
+        if(i > 0){
+            answer.setText(answers.get(--i));
+            System.out.println(i);
+        }
+        else if( i == 0){
+            answer.setText(answer.getText() + "\n已经到了第一个");
+        }
+    }
+
+    //查看下一个答案
+    @FXML
+    private void nextAction(MouseEvent e){
+        if(i >= 0 && i < answers.size() -1){
+            answer.setText(answers.get(++i));
+            System.out.println(i);
+
+        }
+        else if( i == answers.size()){
+            answer.setText(answer.getText() + "\n已经到了最后一个");
+        }
+    }
+
     private void bindTextEvents(){
         text.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -115,6 +160,7 @@ public class Points1Controller implements Initializable {
             }
         });
     }
+
 
 
 }

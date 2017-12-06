@@ -263,8 +263,11 @@ public class Points1 {
         Arrays.sort(temp);
         for (int i = 0 , j = 0; i < ins.length; i++) {
             if(ins[i].length() != 0){
-
-                insNumber[j++] = Integer.valueOf(ins[i].trim());
+                try {
+                    insNumber[j++] = Integer.valueOf(ins[i].trim());
+                }catch (Exception e){
+                    return false;
+                }
             }
         }
 
