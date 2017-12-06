@@ -1,5 +1,8 @@
 package subject_2.main.version_1;
 
+import subject_2.main.Calculator;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,8 +105,22 @@ public class Points1 {
      * 穷举法找到答案
      * @return
      */
-    public HashMap<Character[], Double[]> findAnswers() {
-        HashMap<Character[], Double[]> answers = new HashMap<>();
+    public HashMap<char[], int[]> findAnswers() {
+        HashMap<char[], int[]> answers = new HashMap<>();
+        for (int i = 0; i < operatorsOptions.length; i++) {
+            for (int j = 0; j < operandAllOptions.length; j++) {
+                if(Calculator.calculateAnExpression(operatorsOptions[i],  operandAllOptions[j]) == point){
+                    for (int k = 0; k < operatorsOptions[i].length; k++) {
+                        System.out.print(operatorsOptions[i][k] + " ");
+                    }
+                    for (int k = 0; k < operandAllOptions[j].length; k++) {
+                        System.out.print(operandAllOptions[j][k] + " ");
+                    }
+                    System.out.println();
+                    answers.put(operatorsOptions[i], operandAllOptions[j]);
+                }
+            }
+        }
 
         return answers;
     }
@@ -143,25 +160,25 @@ public class Points1 {
     public void setOperandAllOptions() {
         int length = factorial(cardNumber);
         operandAllOptions = new int[length][cardNumber];
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < cardNumber; j++) {
-//                if(j == 0)
-                    operandAllOptions[i][j] = cards[(i) / (factorial(cardNumber-1))];
-//                else if(j == 1)
-//                    operandAllOptions[i][j] = cards[i / (factorial(cardNumber-1))];
-//                else if(j == 2)
-//                    operandAllOptions[i][j] = cards[i / (factorial(cardNumber-1))];
-//                else if(j == 3)
-//                    operandAllOptions[i][j] = cards[i / (factorial(cardNumber-1))];
-
-            }
+        Arrays.sort(cards);
+        for (int i = 0; i < length ; i++) {
+            operandAllOptions[i] = cards.clone();
+            fullSort(cards, cardNumber);
         }
+
+
     }
 
     public int[][] getOperandAllOptions() {
         return operandAllOptions;
     }
 
+    /**
+     * 计算n的阶乘
+     *
+     * @param num
+     * @return
+     */
     public int factorial(int num){
         if(num <=0 ){
             return 1;
@@ -175,5 +192,56 @@ public class Points1 {
             return temp;
         }
 
+    }
+
+
+    /**
+     * 给已排好序的数组组合
+     * @param arr
+     * @param n
+     * @return
+     */
+    final boolean fullSort(int[] arr, int n) {
+        int i = 0, j = 0, k = -1, l, temp;
+
+        for (i = 0; i < n - 1; i++) { // 找最后的升序的位置
+            if (arr[i] < arr[i + 1]) {
+                k = i;
+            }
+        }
+
+        if (k >= 0) {
+            l = -1;
+
+            for (i = 0; i < n; i++) { // 找到最后一个升序且是最大的数的下标
+                if (arr[k] < arr[i]) {
+                    l = i;
+                }
+            }
+
+            temp = arr[k];
+            arr[k] = arr[l];
+            arr[l] = temp;
+
+            for (i = k + 1; i < n; i++){// 将k+1的元素与末尾对调
+
+                j = n - i + k;
+                if (i >= j){
+                    break;
+                }
+
+                {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+
+        if (k == -1) {
+            return false;
+        }
+
+        return true;
     }
 }

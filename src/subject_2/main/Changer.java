@@ -106,4 +106,23 @@ public class Changer {
     private boolean isOperand(final char operator){
         return !(isOperator(operator) || isOpeningBraces(operator) || isClosingBraces(operator)) ;
     }
+
+
+
+    public String changeCharsNumbersToExpression(char[] operators, int[] operands){
+        String expression = "";//最终的表达式
+
+        LinkedList<String> queue = new LinkedList<>();
+
+        for (int i = 0; i < operators.length; i++) {
+            if(operators[i] == '+' || operators[i] == '-'){
+                queue.push("(");
+                queue.push(operands[i] +"");
+                queue.push(operators[i] +"");
+                queue.push(operands[i+1] + "");
+            }
+        }
+
+        return expression;
+    }
 }
