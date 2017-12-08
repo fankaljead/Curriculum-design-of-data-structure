@@ -15,11 +15,11 @@ public class TailGame2Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/TailGame1View.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/TailGame2View.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("硬币问题V1.0");
+        primaryStage.setTitle("硬币问题V2.0");
         primaryStage.show();
     }
 }

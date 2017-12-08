@@ -6,9 +6,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
+            fx:controller="subject_3.main.version_3.controller.TailGame3Controller"
             prefHeight="400.0" prefWidth="600.0">
+
+    <VBox>
+        <HBox>
+            <JFXButton fx:id="start" text="开始" onMouseClicked="#startAction"/>
+            <JFXButton fx:id="checkAnswers" text="查看答案" onMouseClicked="#checkAnswersAction"/>
+            <JFXButton fx:id="changeRules" text="修改规则"/>
+        </HBox>
+
+
+        <GridPane fx:id="showCoins" onMouseClicked="#selectAction">
+
+        </GridPane>
+        <Label text="选择行数"/>
+        <JFXSlider fx:id="selectRowNum" max="4"/>
+        <Label text="选择列数"/>
+        <JFXSlider  fx:id="selectColumnNum" max="4"/>
+    </VBox>
 
 </AnchorPane>

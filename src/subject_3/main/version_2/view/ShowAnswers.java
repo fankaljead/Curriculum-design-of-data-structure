@@ -1,4 +1,4 @@
-package subject_3.main.version_1.view;
+package subject_3.main.version_2.view;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;

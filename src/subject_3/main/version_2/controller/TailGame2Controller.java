@@ -23,8 +23,8 @@ public class TailGame2Controller implements Initializable{
 
     private static final String PATH = "../../coin/";
     private static final String SUFFIX = ".jpg";
-    private int rowNum = 4;
-    private int columnNum = 4;
+    protected int rowNum = 4;
+    protected int columnNum = 4;
     private ImageView imageView;
     private char[] inputFormCoins = new char[rowNum * columnNum];
 
@@ -74,12 +74,10 @@ public class TailGame2Controller implements Initializable{
 
     //选取要求解的情况 -> 输入
     @FXML
-    private void selectAction(MouseEvent e){
+    protected void selectAction(MouseEvent e){
         String source1 = e.getSource().toString(); //yields complete string
-        String source2 = e.getPickResult().getIntersectedNode().getId(); //returns JUST the id of the object that was clicked
-        System.out.println("Full String: " + source1);
-        System.out.println("Just the id: " + source2);
-        System.out.println(" " + source2);
+        String source2 = e.getPickResult().getIntersectedNode().getId(); //获取点击的节点id returns JUST the id of the object that was clicked
+
         imageView = (ImageView) (showCoins.getScene().lookup("#" + source2));
         if(inputFormCoins[Integer.valueOf(source2)] == 'H'){
             imageView.setImage(new Image(getClass().getResource(PATH + 'T' + SUFFIX).toExternalForm()));
@@ -95,12 +93,11 @@ public class TailGame2Controller implements Initializable{
 
 
 
-    private void startGame(){
+    protected void startGame(){
 //        tailGame = new TailGame(this.rowNum, this.columnNum);
         initialInput();
         this.rowNum = (int)selectRowNum.getValue();
         this.columnNum = (int)selectColumnNum.getValue();
-        System.out.println("row: " + this.rowNum + "\tcolumn: " +this.columnNum);
 
 
         showCoins.getChildren().clear();

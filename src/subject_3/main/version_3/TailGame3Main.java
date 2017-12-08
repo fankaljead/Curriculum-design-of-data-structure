@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * Time: 2017/12/8 19:29
  * Description:
  */
-public class TailGame2Main extends Application{
+public class TailGame3Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/TailGame3View.fxml"));

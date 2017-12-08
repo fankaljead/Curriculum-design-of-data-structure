@@ -51,6 +51,7 @@ public class Points2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startGame();
         bindTextEvents();
         bindBtStartEvents();
     }
@@ -59,26 +60,7 @@ public class Points2Controller implements Initializable {
         btStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                btStart.setText("刷新");
-                answer.setText("");
-                showCards.getChildren().clear();
-                points1 = new Points1();
-                answers = points1.getAnswers();
-                imageView = new ImageView[points1.getCardNumber()];
-                for (int i = 0; i < imageView.length; i++) {
-                    imageView[i] = new ImageView();
-                }
-
-                //关键
-//                Image image = new Image(getClass().getResource("../cards/2.jpg").toExternalForm());//设置图片
-//                card2.setImage(image);//设置图片
-
-                for (int i = 0; i < points1.getCardRealNumber().length; i++) {
-                    Image image = new Image(getClass().getResource(PATH + points1.getCardRealNumber()[i] + SUFFIX).toExternalForm());//设置图片
-                    imageView[i] = new ImageView(image);
-                    showCards.getChildren().add(imageView[i]);
-                }
-
+                startGame();
             }
         });
     }
@@ -159,6 +141,32 @@ public class Points2Controller implements Initializable {
                 }
             }
         });
+    }
+
+
+
+    //开始游戏
+    private void startGame(){
+        btStart.setText("刷新");
+        answer.setText("");
+        showCards.getChildren().clear();
+        points1 = new Points1();
+        answers = points1.getAnswers();
+        imageView = new ImageView[points1.getCardNumber()];
+        for (int i = 0; i < imageView.length; i++) {
+            imageView[i] = new ImageView();
+        }
+
+        //关键
+//                Image image = new Image(getClass().getResource("../cards/2.jpg").toExternalForm());//设置图片
+//                card2.setImage(image);//设置图片
+
+        for (int i = 0; i < points1.getCardRealNumber().length; i++) {
+            Image image = new Image(getClass().getResource(PATH + points1.getCardRealNumber()[i] + SUFFIX).toExternalForm());//设置图片
+            imageView[i] = new ImageView(image);
+            showCards.getChildren().add(imageView[i]);
+        }
+
     }
 
 

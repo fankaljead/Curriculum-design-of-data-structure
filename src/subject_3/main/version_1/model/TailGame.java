@@ -178,7 +178,7 @@ public class TailGame implements ITailGame{
     public int getIndex(char[] node){
         int result = 0;
 
-        for (int i = 0; i < tailNumber; i++) {
+        for (int i = 0; i < getTailNumber(); i++) {
             if(node[i] == 'T'){
                 result = result * SIDES_OF_TAIL + 1;
             }

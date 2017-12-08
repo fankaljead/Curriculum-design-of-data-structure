@@ -11,7 +11,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="subject_3.main.version_1.controller.TailGame1Controller"
+            fx:controller="subject_3.main.version_2.controller.TailGame2Controller"
             prefHeight="400.0" prefWidth="600.0">
     <VBox>
         <HBox>
