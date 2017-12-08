@@ -1,4 +1,4 @@
-package subject_3.main.version_1;
+package subject_3.main.version_1.model;
 
 import util.graph.AbstractGraph;
 import util.graph.UnweightedGraph;
@@ -9,18 +9,20 @@ import java.util.*;
 /**
  * Author: Zhou Xianghui
  * Time: 2017/12/7 9:47
- * Description:
+ * Description: 硬币问题
  */
 public class TailGame implements ITailGame{
 
     public final static int SIDES_OF_TAIL = 2;//每枚硬币的面数，正反两面
     public final static char[] CHAR_OF_EACH_SIDE = {'H', 'T'};//硬币每面的字符
 
+
     private int rows = 4;//行数
     private int columns = 4;//列数
     private int tailNumber = rows * columns;
     private int numberOfNodes = (int)Math.pow(SIDES_OF_TAIL, tailNumber);//硬币问题所有硬币出现的情形
     protected AbstractGraph<Integer>.Tree tree;
+    private ArrayList<Rules> rules = new ArrayList<>();//规则类
 
 
     public TailGame() {
@@ -44,7 +46,8 @@ public class TailGame implements ITailGame{
     //初始化对象 设置硬币总数 ···
     private void setInitial(){
         this.setTailNumber();//必须先设置硬币总数
-        this.setNumberOfNodes();
+        this.setNumberOfNodes();//设置硬币出现的所有次数
+        this.setRules();//设置默认规则
 
         List<AbstractGraph.Edge> edges = getEdges();
         UnweightedGraph<Integer> graph = new UnweightedGraph<Integer>(edges, numberOfNodes);
@@ -81,6 +84,10 @@ public class TailGame implements ITailGame{
 
     private void setTailNumber() {
         this.tailNumber = rows * columns;
+    }
+
+    public ArrayList<Rules> getRules() {
+        return rules;
     }
 
     private List<AbstractGraph.Edge> getEdges(){
@@ -128,17 +135,32 @@ public class TailGame implements ITailGame{
         int column = position % rows;//指定下标的列数
 
         //翻转硬币 默认规则
-        flipACell(node, row, column);
-        flipACell(node, row - 1, column);
-        flipACell(node, row + 1, column);
-        flipACell(node, row, column - 1);
-        flipACell(node, row, column + 1);
+//        flipACell(node, row, column);
+//        flipACell(node, row - 1, column);
+//        flipACell(node, row + 1, column);
+//        flipACell(node, row, column - 1);
+//        flipACell(node, row, column + 1);
+
+
+        //设置规则
+        for (int i = 0; i < rules.size(); i++) {
+            flipACell(node, row + rules.get(i).getRowToNode(), column + rules.get(i).getColumnToNode());
+        }
 
         return getIndex(node);
     }
 
+    /**
+     * 翻转一枚硬币
+     * @param node
+     * @param row 行数
+     * @param column //列数
+     */
     public void flipACell(char[] node, int row, int column){
-        if(row >= 0 && row < rows && column >= 0 && column < columns){
+        if(row >= 0 && row < rows &&
+                column >= 0 && column < columns &&
+                row * rows + column < tailNumber && //判断要翻转的硬币是否在tailNumber下标以内，否则这不翻转
+                row * rows + column > 0){//判断要翻转的硬币是否在tailNumber下标以内，否则这不翻转
             if(node[row * rows + column] == CHAR_OF_EACH_SIDE[0]){//head
                 node[row * rows + column] = CHAR_OF_EACH_SIDE[1];//tail
             }
@@ -175,7 +197,7 @@ public class TailGame implements ITailGame{
 
     public void printNode(char[] node){
         for (int i = 0; i < tailNumber; i++) {
-            if(i % rows != rows - 1){
+            if(i % columns != columns - 1){
                 System.out.print(node[i]);
             }else {
                 System.out.println(node[i]);
@@ -185,12 +207,55 @@ public class TailGame implements ITailGame{
     }
 
     /**
-     * 设置硬币翻转的规则
+     * 设置硬币翻转的默认规则
      */
     @Override
     public void setRules() {
-
+        rules.add(new Rules(0,0));
+        rules.add(new Rules(1, 0));
+        rules.add(new Rules(0,1));
+        rules.add(new Rules(-1, 0));
+        rules.add(new Rules(0,-1));
     }
+
+    /**
+     * 设置规则
+     * @param rules
+     */
+    public void setRules(ArrayList<Rules> rules) {
+        this.rules = rules;
+    }
+
+    //规则类
+    private class Rules{
+        int rowToNode;//相对于position的行数
+        int columnToNode;//相对与position的列数
+
+        public Rules() {
+        }
+
+        public Rules(int rowToNode, int columnToNode) {
+            this.rowToNode = rowToNode;
+            this.columnToNode = columnToNode;
+        }
+
+        public int getRowToNode() {
+            return rowToNode;
+        }
+
+        public void setRowToNode(int rowToNode) {
+            this.rowToNode = rowToNode;
+        }
+
+        public int getColumnToNode() {
+            return columnToNode;
+        }
+
+        public void setColumnToNode(int columnToNode) {
+            this.columnToNode = columnToNode;
+        }
+    }
+
 
     @Override
     public String toString() {

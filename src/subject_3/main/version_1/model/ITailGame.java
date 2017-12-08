@@ -1,4 +1,4 @@
-package subject_3.main.version_1;
+package subject_3.main.version_1.model;
 
 /**
  * Author: Zhou Xianghui
