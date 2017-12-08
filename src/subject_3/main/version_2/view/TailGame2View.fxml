@@ -14,15 +14,19 @@
             fx:controller="subject_3.main.version_1.controller.TailGame1Controller"
             prefHeight="400.0" prefWidth="600.0">
     <VBox>
-        <JFXButton fx:id="start" text="开始" onMouseClicked="#startAction"/>
+        <HBox>
+            <JFXButton fx:id="start" text="开始" onMouseClicked="#startAction"/>
+            <JFXButton fx:id="checkAnswers" text="查看答案" onMouseClicked="#checkAnswersAction"/>
+        </HBox>
 
-        <GridPane fx:id="showCoins">
+
+        <GridPane fx:id="showCoins" onMouseClicked="#selectAction">
 
         </GridPane>
         <Label text="选择行数"/>
-        <JFXSlider fx:id="selectRowNum" onMouseClicked="#rowSelected" max="5"/>
+        <JFXSlider fx:id="selectRowNum" max="4"/>
         <Label text="选择列数"/>
-        <JFXSlider  fx:id="selectColumnNum" onMouseClicked="#columnSelected" max="5"/>
+        <JFXSlider  fx:id="selectColumnNum" max="4"/>
     </VBox>
 
 </AnchorPane>

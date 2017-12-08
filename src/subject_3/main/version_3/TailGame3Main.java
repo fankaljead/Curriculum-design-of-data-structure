@@ -1,4 +1,4 @@
-package subject_3.main.version_1;
+package subject_3.main.version_3;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,18 +8,21 @@ import javafx.stage.Stage;
 
 /**
  * Author: Zhou Xianghui
- * Time: 2017/12/7 20:38
- * Description: 硬币问题的主类 版本1
+ * Time: 2017/12/8 19:29
+ * Description:
  */
-public class TailGame1Main extends Application {
-
+public class TailGame2Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/TailGame1View.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/TailGame3View.fxml"));
 
         Scene scene = new Scene(root);
+        primaryStage.setTitle("硬币问题3.0");
         primaryStage.setScene(scene);
-        primaryStage.setTitle("硬币问题V1.0");
         primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
