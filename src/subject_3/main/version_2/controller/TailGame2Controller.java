@@ -17,25 +17,25 @@ import java.util.ResourceBundle;
 /**
  * Author: Zhou Xianghui
  * Time: 2017/12/7 20:39
- * Description: 硬币问题 控制类 版本1
+ * Description: 硬币问题 控制类 版本2
  */
 public class TailGame2Controller implements Initializable{
 
-    private static final String PATH = "../../coin/";
-    private static final String SUFFIX = ".jpg";
+    protected static final String PATH = "../../coin/";
+    protected static final String SUFFIX = ".jpg";
     protected int rowNum = 4;
     protected int columnNum = 4;
-    private ImageView imageView;
-    private char[] inputFormCoins = new char[rowNum * columnNum];
+    protected ImageView imageView;
+    protected char[] inputFormCoins = new char[rowNum * columnNum];
 
     @FXML
-    private GridPane showCoins;
+    protected GridPane showCoins;
     @FXML
-    private JFXSlider selectColumnNum;
+    protected JFXSlider selectColumnNum;
     @FXML
-    private JFXSlider selectRowNum;
+    protected JFXSlider selectRowNum;
 
-    private TailGame tailGame;
+    protected TailGame tailGame;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,14 +57,15 @@ public class TailGame2Controller implements Initializable{
     }
 
     @FXML
-    private void startAction(MouseEvent e){
+    protected void startAction(MouseEvent e){
+        initialInput();
         startGame();
     }
 
 
     //查看解的情况
     @FXML
-    private void checkAnswersAction(MouseEvent e) throws Exception {
+    protected void checkAnswersAction(MouseEvent e) throws Exception {
 
         tailGame = new TailGame(this.rowNum, this.columnNum);
 
@@ -72,7 +73,7 @@ public class TailGame2Controller implements Initializable{
         showAnswers.start(new Stage());
     }
 
-    //选取要求解的情况 -> 输入
+    //选取要求解的情况 -> 输入 点击硬币
     @FXML
     protected void selectAction(MouseEvent e){
         String source1 = e.getSource().toString(); //yields complete string
@@ -114,7 +115,7 @@ public class TailGame2Controller implements Initializable{
 
 
     //初始化输入
-    private void initialInput(){
+    protected void initialInput(){
         for (int i = 0; i < inputFormCoins.length; i++) {
             inputFormCoins[i] = 'H';
         }

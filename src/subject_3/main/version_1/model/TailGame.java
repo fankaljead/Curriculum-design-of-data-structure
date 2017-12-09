@@ -22,22 +22,38 @@ public class TailGame implements ITailGame{
     private int tailNumber = rows * columns;
     private int numberOfNodes = (int)Math.pow(SIDES_OF_TAIL, tailNumber);//硬币问题所有硬币出现的情形
     protected AbstractGraph<Integer>.Tree tree;
-    private ArrayList<Rules> rules = new ArrayList<>();//规则类
+    private ArrayList<Rules> rules;//规则类
 
 
     public TailGame() {
         this.setInitial();//初始化
     }
 
+    public TailGame(int rows, int columns, ArrayList<Rules> rules) {
+        this.rows = rows;
+        this.columns = columns;
+        if(rules.size() != 0){
+            this.rules = rules;
+        }else {
+            setRules();
+        }
+        this.tailNumber = rows * columns;
+        setInitial();
+    }
+
     public TailGame(int rows) {
         this.rows = rows;
         this.setInitial();//初始化
+        this.tailNumber = rows * this.columns;
+        setInitial();
     }
 
     public TailGame(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.setInitial();//初始化
+        this.tailNumber = rows * columns;
+        setInitial();
     }
 
 
@@ -45,9 +61,8 @@ public class TailGame implements ITailGame{
     //Get Set方法
     //初始化对象 设置硬币总数 ···
     private void setInitial(){
-        this.setTailNumber();//必须先设置硬币总数
+        //this.setTailNumber();//必须先设置硬币总数
         this.setNumberOfNodes();//设置硬币出现的所有次数
-        this.setRules();//设置默认规则
 
         List<AbstractGraph.Edge> edges = getEdges();
         UnweightedGraph<Integer> graph = new UnweightedGraph<Integer>(edges, numberOfNodes);
@@ -144,7 +159,7 @@ public class TailGame implements ITailGame{
 
         //设置规则
         for (int i = 0; i < rules.size(); i++) {
-            flipACell(node, row + rules.get(i).getRowToNode(), column + rules.get(i).getColumnToNode());
+            flipACell(node, row + this.rules.get(i).getRowToNode(), column + this.rules.get(i).getColumnToNode());
         }
 
         return getIndex(node);
@@ -160,7 +175,8 @@ public class TailGame implements ITailGame{
         if(row >= 0 && row < rows &&
                 column >= 0 && column < columns &&
                 row * rows + column < tailNumber && //判断要翻转的硬币是否在tailNumber下标以内，否则这不翻转
-                row * rows + column > 0){//判断要翻转的硬币是否在tailNumber下标以内，否则这不翻转
+                row * rows + column >= 0){//判断要翻转的硬币是否在tailNumber下标以内，否则这不翻转
+
             if(node[row * rows + column] == CHAR_OF_EACH_SIDE[0]){//head
                 node[row * rows + column] = CHAR_OF_EACH_SIDE[1];//tail
             }
@@ -178,8 +194,8 @@ public class TailGame implements ITailGame{
     public int getIndex(char[] node){
         int result = 0;
 
-        for (int i = 0; i < getTailNumber(); i++) {
-            if(node[i] == 'T'){
+        for (int i = 0; i < this.tailNumber; i++) {
+            if(node[i] == CHAR_OF_EACH_SIDE[1]){
                 result = result * SIDES_OF_TAIL + 1;
             }
             else {
@@ -211,6 +227,7 @@ public class TailGame implements ITailGame{
      */
     @Override
     public void setRules() {
+        this.rules = new ArrayList<>();
         rules.add(new Rules(0,0));
         rules.add(new Rules(1, 0));
         rules.add(new Rules(0,1));
@@ -223,11 +240,12 @@ public class TailGame implements ITailGame{
      * @param rules
      */
     public void setRules(ArrayList<Rules> rules) {
+
         this.rules = rules;
     }
 
     //规则类
-    private class Rules{
+    public static class Rules{
         int rowToNode;//相对于position的行数
         int columnToNode;//相对与position的列数
 
@@ -254,7 +272,17 @@ public class TailGame implements ITailGame{
         public void setColumnToNode(int columnToNode) {
             this.columnToNode = columnToNode;
         }
+
+        @Override
+        public String toString() {
+            return "Rules{" +
+                    "rowToNode=" + rowToNode +
+                    ", columnToNode=" + columnToNode +
+                    '}';
+        }
     }
+
+
 
 
     @Override

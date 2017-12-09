@@ -13,11 +13,12 @@
             fx:controller="subject_3.main.version_3.controller.TailGame3Controller"
             prefHeight="400.0" prefWidth="600.0">
 
-    <VBox>
+    <VBox fx:id="vBox">
         <HBox>
-            <JFXButton fx:id="start" text="开始" onMouseClicked="#startAction"/>
+            <JFXButton fx:id="start" text="刷新" onMouseClicked="#startAction"/>
             <JFXButton fx:id="checkAnswers" text="查看答案" onMouseClicked="#checkAnswersAction"/>
-            <JFXButton fx:id="changeRules" text="修改规则"/>
+            <JFXButton fx:id="changeRules" text="修改规则" onMouseClicked="#changeRulesAction"/>
+            <JFXButton fx:id="initialRules" text="重置规则" onMouseClicked="#initialRulesAction"/>
         </HBox>
 
 
