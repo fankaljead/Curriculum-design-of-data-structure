@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.text.Text?>
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="main"
+            fx:controller="subject_4.main.version_1.linkedList.controller.ShowLinkedListController"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox>
+        <Pane fx:id="showArea" prefHeight="300" prefWidth="600">
+
+
+        </Pane>
+
+        <HBox fx:id="option">
+            <Label text="请输入值："/>
+            <JFXTextField fx:id="enterValue" prefWidth="100"/>
+
+            <Label text="请输入下标："/>
+            <JFXTextField fx:id="enterIndex" prefWidth="100"/>
+
+            <JFXButton fx:id="btSearch" text="搜索" onMouseClicked="#btSearchAction"/>
+            <JFXButton fx:id="btInsert" text="插入" onMouseClicked="#btInsertAction"/>
+            <JFXButton fx:id="btDelete" text="删除" onMouseClicked="#btDeleteAction"/>
+
+        </HBox>
+    </VBox>
+
+</StackPane>
