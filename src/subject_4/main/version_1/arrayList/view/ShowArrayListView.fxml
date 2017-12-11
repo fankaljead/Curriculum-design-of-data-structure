@@ -15,14 +15,14 @@
             fx:id="main">
     <VBox>
         <HBox fx:id="showDetail">
-            <Label text="array list is "/>
-            <Label fx:id="arrayIsEmpty" text="empty"/>
+            <Label text="array list"/>
+            <Label fx:id="arrayIsEmpty" text=" is empty"/>
 
-            <Label text="    size is "/>
+            <Label text=" size is "/>
             <Label fx:id="arraySize" text="0 "/>
 
             <Label text="and capacity is "/>
-            <Label fx:id="arrayCapacity" text="11"/>
+            <Label fx:id="arrayCapacity" text="10"/>
 
         </HBox>
 

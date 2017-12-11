@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import subject_4.main.version_1.arrayList.model.ShowArrayList;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +30,7 @@ public class ShowArrayListController implements Initializable {
     public static int HEIGHT = 40;
     public static int START_X = 20;
     public static int START_Y = 20;
+    public static int capacitySize = 10;//初始容量
 
     @FXML
     protected StackPane main;
@@ -54,14 +53,29 @@ public class ShowArrayListController implements Initializable {
     @FXML
     protected Pane showList;//展示线性表
 
-    protected ArrayList<String> showArrayList = new ArrayList<>();//存储输入元素的线性表
-    protected ArrayList<Rectangle> showArrayListRec = new ArrayList<>();//存储输入元素的线性表的矩形
+    protected ArrayList<String> showArrayList = new ArrayList<>(capacitySize);//存储输入元素的线性表
+    protected boolean trim = true;
 
     protected JFXDialog dialog = new JFXDialog();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initialInsert();
         dialog.setDialogContainer(main);
+
+
+    }
+
+
+    //设置有个线性表的信息
+    protected void setLabel(){
+        arraySize.setText(showArrayList.size() + " ");
+        arrayCapacity.setText(capacitySize + "");
+        if(showArrayList.size() == 0){
+            arrayIsEmpty.setText(" is empty");
+        }else {
+            arrayIsEmpty.setText("");
+        }
     }
 
 
@@ -93,7 +107,11 @@ public class ShowArrayListController implements Initializable {
         //当未下标时，在线性表最后添加
         else if(enterIndex.getText().length() == 0){
             showArrayList.add(enterValue.getText());
-            insertRectangles();
+            if(!trim){
+                insertRectanglesTrim();
+            }else {
+                insertRectangles();
+            }
             //showList.getChildren().add(new Rectangle(10,10, 100,100));
         }
 
@@ -113,11 +131,63 @@ public class ShowArrayListController implements Initializable {
     @FXML
     protected void btDeleteAction(MouseEvent e){
 
+        if(showArrayList.size() == 0){
+            initialInsert();
+        }
+
+        //当输入为空时
+        if(enterValue.getText().compareTo("") == 0 &&
+                enterValue.getText().length() == 0 &&
+                enterIndex.getText().length() == 0
+                ){
+            showDialog("输入的值不能为空");
+        }
+
+        //当下标为输入空时，根据元素值删除线性表
+        else if(enterIndex.getText().length() == 0){
+            if(showArrayList.remove(enterValue.getText())){
+                showDialog("删除成功");
+                System.out.println(showArrayList.toString());
+
+            }else {
+                showDialog("删除失败");
+            }
+        }
+
+        //根据下标删除元素
+        else {
+            try{
+                if(showArrayList.remove(Integer.valueOf(enterIndex.getText()))){
+                    showDialog("删除成功");
+                }else {
+                    showDialog("删除失败");
+                }
+            }catch (NumberFormatException exception){
+                showDialog("请正确输入下标");
+            }catch (IndexOutOfBoundsException exception){
+                showDialog("请输入下标以内的");
+            }
+
+        }
+
+
+        if(!trim){
+            insertRectanglesTrim();
+        }else {
+            insertRectangles();
+        }
     }
 
     //Trim To Size
     @FXML
     protected void btTrimToSizeAction(MouseEvent e){
+        if(trim){
+            insertRectanglesTrim();
+            trim = false;
+        }else {
+            insertRectangles();
+            trim = true;
+        }
 
     }
 
@@ -127,22 +197,83 @@ public class ShowArrayListController implements Initializable {
         dialog.show();
     }
 
-    //插入矩形
+    //插入矩形 without trim
     protected void insertRectangles(){
-        if(showArrayList.size() != 0){
+        setLabel();
+        if(showArrayList.size() >= 0){
             showList.getChildren().clear();
+            if(showArrayList.size() >= capacitySize){
+                capacitySize *= 1.5;
+            }
 
-            for (int i = 0; i < showArrayList.size(); i++) {
+            //根据容量添加
+            for (int i = 0; i < capacitySize; i++) {
 
                 Rectangle rectangle = new Rectangle(START_X + i * WIDTH, START_Y, WIDTH, HEIGHT);
                 rectangle.setFill(Color.WHITE);
                 rectangle.setStroke(Color.BLACK);
-
-                Text text = new Text(rectangle.getX() + rectangle.getWidth()/ 2, rectangle.getY() + rectangle.getHeight() /2, showArrayList.get(i));
-                System.out.println(showArrayList.get(i));
-                showList.getChildren().add(text);
+                rectangle.setOpacity(0.5);
                 showList.getChildren().add(rectangle);
+
+                //当有元素时
+                if(i < showArrayList.size()) {
+                    Text text = new Text(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2, showArrayList.get(i));
+                    showList.getChildren().add(text);
+                }
+                //当超过线性表大小
+                else {
+                    Line line = new Line(rectangle.getX(), rectangle.getY() + HEIGHT, rectangle.getX() + WIDTH, rectangle.getY());
+                    showList.getChildren().add(line);
+                }
+
             }
+        }
+    }
+
+
+    //trim后插入
+    protected void insertRectanglesTrim(){
+        setLabel();
+
+        if(showArrayList.size() >= 0){
+            showList.getChildren().clear();
+
+            //根据线性大小添加
+            for (int i = 0; i < showArrayList.size(); i++) {
+
+                //添加矩形
+                Rectangle rectangle = new Rectangle(START_X + i * WIDTH, START_Y, WIDTH, HEIGHT);
+                rectangle.setFill(Color.WHITE);
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setOpacity(0.2);
+                showList.getChildren().add(rectangle);
+
+                //添加元素值
+                Text text = new Text(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2, showArrayList.get(i));
+                showList.getChildren().add(text);
+            }
+        }
+    }
+
+
+    //初始化插入
+    protected void initialInsert(){
+        setLabel();
+
+        showList.getChildren().clear();
+
+        for (int i = 0; i < capacitySize; i++) {
+
+            //添加矩形
+            Rectangle rectangle = new Rectangle(START_X + i * WIDTH, START_Y, WIDTH, HEIGHT);
+            rectangle.setFill(Color.WHITE);
+            rectangle.setStroke(Color.BLACK);
+            rectangle.setOpacity(0.3);
+            showList.getChildren().add(rectangle);
+
+            //添加线
+            Line line = new Line(rectangle.getX(), rectangle.getY() + HEIGHT, rectangle.getX() + WIDTH, rectangle.getY());
+            showList.getChildren().add(line);
         }
     }
 }
