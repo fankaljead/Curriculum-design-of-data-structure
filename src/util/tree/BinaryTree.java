@@ -408,9 +408,9 @@ public class BinaryTree<E extends Comparable<E>> extends AbstractTree<E>{
      */
     public static class TreeNode<E extends Comparable<E>>{
 
-        E element;
-        TreeNode<E> left;
-        TreeNode<E> right;
+        public E element;
+        public TreeNode<E> left;
+        public TreeNode<E> right;
 
         public TreeNode(E e){
             element = e;

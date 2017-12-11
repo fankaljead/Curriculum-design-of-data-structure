@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<StackPane xmlns="http://javafx.com/javafx"
+            fx:id="main"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="subject_4.main.version_2.controller.ShowBinaryTreeController"
+            prefHeight="800.0" prefWidth="900.0">
+
+    <VBox>
+        <Pane fx:id="showTree" prefHeight="700">
+
+        </Pane>
+
+        <HBox fx:id="option">
+            <Label text="请输入："/>
+            <JFXTextField fx:id="enterKey" />
+            <JFXButton fx:id="btSearch" text="搜索" onMouseClicked="#btSearchAction"/>
+            <JFXButton fx:id="btInsert" text="插入" onMouseClicked="#btInsertAction"/>
+            <JFXButton fx:id="btRemove" text="删除" onMouseClicked="#btRemoveAction"/>
+        </HBox>
+    </VBox>
+
+</StackPane>
