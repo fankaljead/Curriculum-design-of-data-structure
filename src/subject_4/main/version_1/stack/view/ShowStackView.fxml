@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="main"
+           fx:controller="subject_4.main.version_1.stack.controller.ShowStackController"
+           prefHeight="400.0" prefWidth="800.0">
+    <HBox>
+        <Pane fx:id="showArea" prefHeight="300" prefWidth="400">
+
+
+        </Pane>
+
+        <HBox fx:id="option">
+            <Label text="请输入值："/>
+            <JFXTextField fx:id="enterValue" prefWidth="100"/>
+
+
+
+            <JFXButton fx:id="btInsert" text="Push" onMouseClicked="#btInsertAction"/>
+            <JFXButton fx:id="btDelete" text="Pop" onMouseClicked="#btDeleteAction"/>
+            <JFXButton fx:id="btPeek" text="Peek" onMouseClicked="#btPeekAction"/>
+
+        </HBox>
+    </HBox>
+</StackPane>
