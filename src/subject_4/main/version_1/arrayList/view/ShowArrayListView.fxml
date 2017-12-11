@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="subject_4.main.version_1.arrayList.controller.ShowArrayListController"
+            prefHeight="400.0" prefWidth="700.0"
+            fx:id="main">
+    <VBox>
+        <HBox fx:id="showDetail">
+            <Label text="array list is "/>
+            <Label fx:id="arrayIsEmpty" text="empty"/>
+
+            <Label text="    size is "/>
+            <Label fx:id="arraySize" text="0 "/>
+
+            <Label text="and capacity is "/>
+            <Label fx:id="arrayCapacity" text="11"/>
+
+        </HBox>
+
+        <Pane fx:id="showList">
+
+        </Pane>
+
+        <HBox fx:id="option">
+            <Label text="请输入值："/>
+            <JFXTextField fx:id="enterValue" prefWidth="100"/>
+
+            <Label text="请输入下标："/>
+            <JFXTextField fx:id="enterIndex" prefWidth="100"/>
+
+            <JFXButton fx:id="btSearch" text="搜索" onMouseClicked="#btSearchAction"/>
+            <JFXButton fx:id="btInsert" text="插入" onMouseClicked="#btInsertAction"/>
+            <JFXButton fx:id="btDelete" text="删除" onMouseClicked="#btDeleteAction"/>
+            <JFXButton fx:id="btTrimToSize" text="TrimToSize" onMouseClicked="#btTrimToSizeAction"/>
+
+        </HBox>
+
+    </VBox>
+
+</StackPane>
