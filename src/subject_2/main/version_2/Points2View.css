@@ -1,0 +1,13 @@
+.button:pressed:hover {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.button:hover {
+    -fx-background-color: #edf713;
+    -fx-scale-y: 1.1;
+}
+imageView:hover{
+    -fx-background-color: #edf713;
+    -fx-scale-y: 1.1;
+}

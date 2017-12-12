@@ -1,4 +1,4 @@
-package subject_4.main.version_3;
+package subject_4.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,17 +8,17 @@ import javafx.stage.Stage;
 
 /**
  * Author: Zhou Xianghui
- * Time: 2017/12/11 22:15
- * Description: 展示非加权图的主类
+ * Time: 2017/12/12 9:51
+ * Description:
  */
-public class ShowUnweightedGraphMain extends Application {
+public class Subject_4_Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/ShowUnweightedGraphView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Subject_4_View.fxml"));
 
         Scene scene = new Scene(root);
+        primaryStage.setTitle("展示线性表、树、图");
         primaryStage.setScene(scene);
-        primaryStage.setTitle("展示图");
         primaryStage.show();
     }
 }

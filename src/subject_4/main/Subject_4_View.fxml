@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="subject_4.main.Subject_4_Controller"
+            stylesheets="@Subject_4_View.css"
+            prefHeight="1000.0" prefWidth="1200.0">
+    <HBox fx:id="subject_4">
+        <VBox fx:id="option">
+            <JFXButton fx:id="show_array" text="线性表" onMouseClicked="#show_array_action"/>
+            <JFXButton fx:id="show_linked" text="链表" onMouseClicked="#show_linked_action"/>
+            <JFXButton fx:id="show_stack" text="栈" onMouseClicked="#show_stack_action"/>
+            <JFXButton fx:id="show_queue" text="队列" onMouseClicked="#show_queue_action"/>
+            <JFXButton fx:id="show_tree" text="二叉树" onMouseClicked="#show_tree_action"/>
+            <JFXButton fx:id="show_graph" text="图"/>
+        </VBox>
+        <Pane fx:id="option_view">
+
+        </Pane>
+
+    </HBox>
+</AnchorPane>

@@ -21,6 +21,16 @@
     padding: auto;
 }
 
+.button:pressed:hover {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.button:hover {
+    -fx-background-color: #383838;
+    -fx-scale-y: 1.1;
+}
+
 .pane{
     -fx-spacing: 20px;
 }

@@ -26,6 +26,8 @@ public class DrawHuffmanCode extends Application{
     private final int X = WIDTH/2;
     private final int Y = 50;
     public final int RADIUS = 50;
+    public final static double REAGAN_THREE = Math.sqrt(3);
+    public final static double REAGAN_TWO = Math.sqrt(2);
 
     public DrawHuffmanCode(Huffman huffman) {
         this.huffman = huffman;
@@ -44,24 +46,72 @@ public class DrawHuffmanCode extends Application{
 
     //前序遍历
     public void preorder(Huffman.HuffmanTree.TreeNode root){
+
         preorder(root, X, Y);
     }
 
-    public void preorder(Huffman.HuffmanTree.TreeNode root, int x, int y){
+    public void preorder(Huffman.HuffmanTree.TreeNode root, double x, double y){
         if(root == null){
             return;
         }
 
+//        if(flag){
+//            //添加root左边的边
+//            if(root.left != null){
+//                pane.getChildren().add(new Line(x - 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
+//                        x - 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
+//                pane.getChildren().add(new Text(x - RADIUS, y + REAGAN_THREE * RADIUS, "0"));
+//            }
+//
+//            //添加root右边的边
+//            if(root.right != null){
+////            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
+////            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
+//
+//                pane.getChildren().add(new Line(x + RADIUS/REAGAN_TWO, y + RADIUS/REAGAN_TWO,
+//                        x + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO, y + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO));//画左边的线
+//                pane.getChildren().add(new Text(x + REAGAN_THREE*RADIUS, y + REAGAN_THREE * RADIUS, "1"));
+//
+//            }
+//
+//            flag = false;
+//        }else {
+//            //添加root左边的边
+//            if(root.left != null){
+//                pane.getChildren().add(new Line(x - RADIUS/REAGAN_TWO, y + RADIUS/REAGAN_TWO,
+//                        x - 2 * RADIUS * REAGAN_THREE + RADIUS/REAGAN_TWO, y + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO));//画左边的线
+//                pane.getChildren().add(new Text(x - REAGAN_THREE*RADIUS, y + REAGAN_THREE * RADIUS, "0"));
+//            }
+//
+//            //添加root右边的边
+//            if(root.right != null){
+////            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
+////            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
+//
+//                pane.getChildren().add(new Line(x + 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
+//                        x + 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
+//                pane.getChildren().add(new Text(x + RADIUS, y + REAGAN_THREE * RADIUS, "1"));
+//
+//            }
+//
+//            flag = true;
+//        }
+
         //添加root左边的边
         if(root.left != null){
-            pane.getChildren().add(new Line(x - 2*RADIUS + RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x + RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画左边的线
-            pane.getChildren().add(new Text(x - RADIUS, y + RADIUS, "0"));
+            pane.getChildren().add(new Line(x - 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
+                    x - 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
+            pane.getChildren().add(new Text(x - RADIUS, y + REAGAN_THREE * RADIUS, "0"));
         }
 
         //添加root右边的边
         if(root.right != null){
-            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
-            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
+//            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
+//            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
+
+            pane.getChildren().add(new Line(x + 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
+                    x + 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
+            pane.getChildren().add(new Text(x + RADIUS, y + REAGAN_THREE * RADIUS, "1"));
 
         }
 
@@ -81,8 +131,8 @@ public class DrawHuffmanCode extends Application{
 
             pane.getChildren().add(new Text(x , y , temp));
 
-            preorder(root.left, x - 2*RADIUS, y + 2*RADIUS);//
-            preorder(root.right, x + 2*RADIUS, y + 2*RADIUS);
+            preorder(root.left, x - 2*RADIUS, y + 2*RADIUS * REAGAN_THREE);//
+            preorder(root.right, x + 2*RADIUS, y + 2*RADIUS * REAGAN_THREE);
 
         }
     }
