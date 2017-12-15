@@ -6,9 +6,9 @@
 ---------------------------
 [3 16枚硬币反面问题](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_3)
 --------------------------
-4 线性表、树、图的操作和演示
+[4 线性表、树、图的操作和演示](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_4)
 --------------------------
-5 农夫过河问题
+[5 农夫过河问题](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_5)
 -------------------------
 6 迷宫问题
 ------------------------
