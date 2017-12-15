@@ -1,5 +1,6 @@
 package subject_6.main.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,14 +8,15 @@ import java.util.*;
  * Time: 2017/12/15 10:53
  * Description: 迷宫类
  */
-public class Maze {
+public class Maze implements Serializable{
     private int rows = 10;//迷宫的行数
     private int columns = 10;//迷宫的列数
     private byte[][] mazeData;//存储迷宫的数据0表示通路，1表示阻碍
     private int startPoint = 0;//迷宫起点
     private int endPoint = rows * columns - 1;//迷宫终点
-    private Position labyrinth[][];
+    private Position[][] labyrinth = new Position[rows][columns];
 
+    public static final double PASS_PROBABILITY = 0.6;//控制通过出现的概率
     public static final byte[] STATE = {0, 1};//点的状态 0表示通过 1表示阻碍
 
     private ArrayList<ArrayList<String>> route = new ArrayList<>();
@@ -87,6 +89,14 @@ public class Maze {
         return route;
     }
 
+    public Position[][] getLabyrinth() {
+        return labyrinth;
+    }
+
+    public void setLabyrinth(Position[][] labyrinth) {
+        this.labyrinth = labyrinth;
+    }
+
     /**
      * 随机生成迷宫
      */
@@ -99,13 +109,15 @@ public class Maze {
         for (int i = 0; i < mazeData.length; i++) {
             for (int j = 0; j < mazeData[i].length; j++) {
 
-                labyrinth[i][j] = new Position(i, j, 0);
 
-                if(Math.random() > 0.5){
+
+                if(Math.random() > PASS_PROBABILITY){//控制通过出现的概率
                     mazeData[i][j] = STATE[1];
+                    labyrinth[i][j] = new Position(i, j, 1);
                 }
                 else {
                     mazeData[i][j] = STATE[0];
+                    labyrinth[i][j] = new Position(i, j, 0);
                 }
             }
         }
@@ -117,7 +129,21 @@ public class Maze {
 
     //找到迷宫出口路线
     public boolean findPath(){
-        return findPath(mazeData, startPoint/this.rows, startPoint%this.rows);
+        findWay = false;
+        byte[][] temp = mazeDataCopy();
+        return findPath(temp, startPoint/this.rows, startPoint%this.rows);
+    }
+
+
+    public byte[][] mazeDataCopy(){
+        byte[][] temp = new byte[this.rows][this.columns];
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                temp[i][j] = mazeData[i][j];
+            }
+        }
+
+        return temp;
     }
 
 
@@ -133,9 +159,7 @@ public class Maze {
         //到达出口时
         if (x == endPoint/this.columns && y == endPoint%this.columns) {
             findWay = true;
-//            route.get(route.size()-1).setDirection(Position.END);
-//            route.remove(route.size() - 1);
-//            route.add(new Position(endPoint/this.columns, endPoint%this.columns, Position.END));
+
             return true;
         }
 

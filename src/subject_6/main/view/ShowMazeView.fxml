@@ -7,10 +7,11 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<AnchorPane xmlns="http://javafx.com/javafx"
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="subject_6.main.controller.ShowMazeController"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:id="stackPane"
+            prefHeight="400.0" prefWidth="620.0">
     <HBox>
         <GridPane fx:id="mazeArea" prefWidth="500">
 
@@ -25,4 +26,4 @@
         </VBox>
     </HBox>
 
-</AnchorPane>
+</StackPane>

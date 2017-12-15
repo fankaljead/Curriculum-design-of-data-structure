@@ -21,10 +21,6 @@ public class Subject_6_Test {
             System.out.println();
         }
         System.out.println(maze.findPath());
-        maze.findAllWays();
-//        ArrayList<ArrayList<String>> positions = maze.getRoute();
-//        for (int i = 0; i < positions.size(); i++) {
-//            System.out.println(i+ " :" + positions.get(i) + ", ");
-//        }
+        System.out.println(maze.findPath());
     }
 }
