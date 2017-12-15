@@ -1,6 +1,9 @@
 package subject_6.test;
 
 import subject_6.main.model.Maze;
+import subject_6.main.model.Position;
+
+import java.util.ArrayList;
 
 /**
  * Author: Zhou Xianghui
@@ -9,16 +12,19 @@ import subject_6.main.model.Maze;
  */
 public class Subject_6_Test {
     public static void main(String[] args) {
-        int r = 12;
-        int c = 12;
-        Maze maze = new Maze(r, c);
-        byte[][] x = maze.getMazeData();
-
+       Maze maze = new Maze(4, 4);
+       byte[][] x = maze.getMazeData();
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[i].length; j++) {
                 System.out.print(x[i][j] + " ");
             }
             System.out.println();
         }
+        System.out.println(maze.findPath());
+        maze.findAllWays();
+//        ArrayList<ArrayList<String>> positions = maze.getRoute();
+//        for (int i = 0; i < positions.size(); i++) {
+//            System.out.println(i+ " :" + positions.get(i) + ", ");
+//        }
     }
 }

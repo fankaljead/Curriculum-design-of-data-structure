@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="subject_6.main.controller.ShowMazeController"
+            prefHeight="400.0" prefWidth="600.0">
+    <HBox>
+        <GridPane fx:id="mazeArea" prefWidth="500">
+
+        </GridPane>
+
+        <VBox fx:id="option">
+            <JFXButton text="OK" onMouseClicked="#okAction"/>
+            <JFXButton text="Cancel" onMouseClicked="#cancelAction"/>
+            <JFXButton text="随机生成" onMouseClicked="#randomAction"/>
+            <JFXButton text="保存数据" onMouseClicked="#saveAction"/>
+            <JFXButton text="取出数据" onMouseClicked="#getAction"/>
+        </VBox>
+    </HBox>
+
+</AnchorPane>
