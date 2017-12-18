@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="main" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subject_4.main.version_3.controller.Graph3Controller">
+
+    <Pane fx:id="showMap" layoutX="43.0" layoutY="14.0" prefHeight="600" prefWidth="800">
+
+    </Pane>
+    <JFXTextField fx:id="startCity" blendMode="GREEN" layoutX="152.0" layoutY="634.0" nodeOrientation="LEFT_TO_RIGHT" promptText="输入起点城市" />
+    <JFXTextField fx:id="endCity" blendMode="GREEN" layoutX="400.0" layoutY="634.0" nodeOrientation="LEFT_TO_RIGHT" promptText="输入终点城市" />
+    <JFXButton layoutX="634.0" layoutY="634.0" onMouseClicked="#shortestAction" text="展示最短路径" />
+</AnchorPane>

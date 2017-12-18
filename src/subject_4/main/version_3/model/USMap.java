@@ -32,5 +32,5 @@ public class USMap {
                     { 9, 8 }, { 9, 11 },
                     { 10, 2 }, { 10, 4 }, { 10, 8 }, { 10, 11 },
                     { 11, 8 }, { 11, 9 }, { 11, 10 } };
-    public AbstractGraph<City> graph = new UnweightedGraph<City>(edges, vertices);
+    public UnweightedGraph<City> graph = new UnweightedGraph<City>(edges, vertices);
 }
