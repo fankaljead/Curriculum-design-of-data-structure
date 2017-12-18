@@ -11,10 +11,11 @@ import javafx.stage.Stage;
  * Time: 2017/12/11 22:15
  * Description: 展示非加权图的主类
  */
-public class ShowUnweightedGraphMain extends Application {
+public class Graph1Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/ShowUnweightedGraphView.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("view/ShowUnweightedGraphView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/Graph1View.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

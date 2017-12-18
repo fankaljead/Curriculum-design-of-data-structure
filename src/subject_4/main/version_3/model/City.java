@@ -10,7 +10,7 @@ public class City implements Displayable {
     private double y;//纵坐标
     private String name;//城市的名称
 
-    public City(double x, double y, String name) {
+    public City(String name, double x, double y) {
         this.x = x;
         this.y = y;
         this.name = name;
@@ -30,17 +30,17 @@ public class City implements Displayable {
 
     @Override
     public double getX() {
-        return 0;
+        return x;
     }
 
     @Override
     public double getY() {
-        return 0;
+        return y;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     public void setX(double x) {
@@ -53,5 +53,14 @@ public class City implements Displayable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "x=" + x +
+                ", y=" + y +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
