@@ -15,6 +15,7 @@
     <top>
         <HBox>
             <JFXButton fx:id="btStart" text="开始游戏"/>
+            <JFXButton fx:id="btInput" text="输入求解" onMouseClicked="#btInputAction"/>
             <JFXButton fx:id="btEnd" text="退出" onMouseClicked="#btEndAction"/>
         </HBox>
 

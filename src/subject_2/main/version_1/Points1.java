@@ -47,6 +47,14 @@ public class Points1 {
         setOperandAllOptions();
     }
 
+
+    public Points1(int[] cards){
+        this.cards = cards;
+
+        setOperatorsOptions();
+        setOperandAllOptions();
+    }
+
     public Points1(){
         startAGame();
         setOperatorsOptions();

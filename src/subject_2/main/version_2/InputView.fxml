@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subject_2.main.version_2.InputController">
+        
+         <JFXTextField fx:id="input4" layoutX="470.0" layoutY="70.0" prefHeight="30.0" prefWidth="64.0" />
+         <JFXTextField fx:id="input3" layoutX="316.0" layoutY="70.0" prefHeight="30.0" prefWidth="64.0" />
+         <JFXTextField fx:id="input2" layoutX="159.0" layoutY="70.0" prefHeight="30.0" prefWidth="64.0" />
+         <JFXTextField fx:id="input1" layoutX="27.0" layoutY="70.0" prefHeight="30.0" prefWidth="75.0" />
+   <JFXButton layoutX="213.0" layoutY="279.0" mnemonicParsing="false" onMouseClicked="#answerAction" prefHeight="52.0" prefWidth="135.0" text="查看解">
+      <font>
+         <Font size="17.0" />
+      </font></JFXButton>
+   <Text layoutX="165.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="请输入4个1-13内的数求解">
+      <font>
+         <Font size="23.0" />
+      </font>
+   </Text>
+   <Text fx:id="answerText" layoutX="183.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="194.30029296875">
+      <effect>
+         <Blend />
+      </effect>
+       <font>
+           <Font size="23.0" />
+       </font>
+   </Text>
+</AnchorPane>

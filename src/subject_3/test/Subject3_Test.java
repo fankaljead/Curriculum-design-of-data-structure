@@ -16,11 +16,11 @@ public class Subject3_Test {
 //        Scanner input = new Scanner(System.in);
 //        String s = input.nextLine();//不能输入空格
 //        char[] initialNode = s.toCharArray();
-//        ArrayList<TailGame.Rules> rules = new ArrayList<>();
+        ArrayList<TailGame.Rules> rules = new ArrayList<>();
 //        rules.add(new TailGame.Rules(0, 0));
 //        rules.add(new TailGame.Rules(0, 1));
 //
-//        TailGame model = new TailGame(3, 3, rules);
+        TailGame model = new TailGame(100, 400, rules);
 ////        System.out.println(model.getNode(12));
 ////        char[] tail = {'T', 'H', 'H', 'H',
 ////                        'H', 'H', 'H', 'H',
@@ -38,7 +38,7 @@ public class Subject3_Test {
 //            model.printNode(model.getNode(path.get(i).intValue()));
 //        }
 //        System.out.println(model.toString());
-        System.out.println(Math.ceil(  (double) 5 / 2));
+//        System.out.println(Math.ceil(  (double) 5 / 2));
 
     }
 }
