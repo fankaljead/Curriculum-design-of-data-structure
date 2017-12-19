@@ -12,3 +12,6 @@
 -------------------------
 [6 迷宫问题](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_6)
 ------------------------
+
+本项目需要导入JavaFX的jfoenix的jar包，下载密码：cgh6
+[点击我下载](https://pan.baidu.com/s/1nuYHdLv)
