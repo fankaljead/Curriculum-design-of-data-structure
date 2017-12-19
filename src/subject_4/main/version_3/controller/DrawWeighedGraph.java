@@ -29,7 +29,8 @@ public class DrawWeighedGraph {
     public List<City> vertices = graph.getVertices();
     public List<City> path = new ArrayList<>();
 
-    public void load(AbstractGraph<City>.Tree tree, Pane pane){
+    public void loadMap(Pane pane){
+
         // 画顶点
         List<City> vertices = graph.getVertices();
 
@@ -51,12 +52,11 @@ public class DrawWeighedGraph {
             List<Integer> neighbors = graph.getNeighbors(i);
             for (int j = 0; j < neighbors.size(); j++) {
                 int v = neighbors.get(j);
-                double x1 = graph.getVertex(i).getX();
-                double y1 = graph.getVertex(i).getY();
-                double x2 = graph.getVertex(v).getX();
-                double y2 = graph.getVertex(v).getY();
 
-                Line line = new Line(x1, y1, x2, y2);
+                Line line = new Line(graph.getVertex(i).getX(),
+                        graph.getVertex(i).getY(),
+                        graph.getVertex(v).getX(),
+                        graph.getVertex(v).getY());
                 pane.getChildren().add(line);
             }
         }
@@ -83,34 +83,18 @@ public class DrawWeighedGraph {
             }
         }
 
-        if (tree != null) {
-            for(int i = 0; i < tree.getNumberOfVerticesFound(); i++) {
-                if (tree.getParent(i) != -1) {
-                    int v = tree.getParent(i);
-                    double x1 = graph.getVertex(i).getX();
-                    double y1 = graph.getVertex(i).getY();
-                    double x2 = graph.getVertex(v).getX();
-                    double y2 = graph.getVertex(v).getY();
 
-                    Line line = new Line(x1, y1, x2, y2);
-                    line.setStroke(Color.RED);
-                    pane.getChildren().add(line);
-
-                }
-            }
-
-        }
 
         // Display the path
-        if (path != null) {
+        if (path.size() > 0) {
 
             for (int i = 1; i < path.size(); i++) {
-                double x1 = path.get(i).getX();
-                double y1 = path.get(i).getY();
-                double x2 = path.get(i - 1).getX();
-                double y2 = path.get(i - 1).getY();
-                drawingArrowhead(x1, y1, x2, y2,pane);
 
+                drawingArrowhead(path.get(i).getX(),
+                        path.get(i).getY(),
+                        path.get(i - 1).getX(),
+                        path.get(i - 1).getY(),
+                        pane);
             }
         }
     }
@@ -119,6 +103,7 @@ public class DrawWeighedGraph {
     protected void drawingArrowhead(double x1, double y1, double x2, double y2, Pane pane){
 
         Line line = new Line(x1, y1, x2, y2);
+        line.setStrokeWidth(3);//设置线的宽度
         line.setFill(Color.RED);
         line.setStroke(Color.RED);
         pane.getChildren().add(line);
@@ -144,7 +129,10 @@ public class DrawWeighedGraph {
         Line line1 = new Line(x2, y2, (x2 + (Math.cos(arctan + set45) * arrlen)), ((y2)) + (Math.sin(arctan + set45) * arrlen));
         Line line2 = new Line(x2, y2, (x2 + (Math.cos(arctan - set45) * arrlen)), ((y2)) + (Math.sin(arctan - set45) * arrlen));
 
-        line1.setStroke(Color.RED);
+
+        line1.setStrokeWidth(3);//设置线的宽度
+        line1.setStrokeWidth(3);//设置线的宽度
+        line1.setStroke(Color.RED);//颜色
         line2.setStroke(Color.RED);
         // 在线上加箭头
         pane.getChildren().add(line1);

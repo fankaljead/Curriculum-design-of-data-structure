@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * Author: Zhou Xianghui
  * Time: 2017/12/18 21:34
- * Description:
+ * Description: 绘制非加权图
  */
-public class DrawWeightGraph {
+public class DrawUnweighedtGraph {
 
     public USMap usMap = new USMap();
     public AbstractGraph<City> graph = usMap.graph;
@@ -38,7 +38,7 @@ public class DrawWeightGraph {
             Circle circle = new Circle(x, y, 6);
             circle.setFill(Color.BLACK);
 
-            Text text = new Text(x - 15, y - 15, name+"");
+            Text text = new Text(x - 15, y - 15, name);
 
             showMap.getChildren().addAll(circle, text);
 
@@ -51,30 +51,28 @@ public class DrawWeightGraph {
                 // 获取到相邻节点
                 int v = edges.get(j);
 
-                // 分别获取两个点的横坐标和纵坐标
-                double x1 = graph.getVertex(i).getX();
-                double y1 = graph.getVertex(i).getY();
-                double x2 = graph.getVertex(v).getX();
-                double y2 = graph.getVertex(v).getY();
-
                 // 连接直线
-                Line line = new Line(x1, y1, x2, y2);
+                Line line = new Line(graph.getVertex(i).getX(),
+                        graph.getVertex(i).getY(),
+                        graph.getVertex(v).getX(),
+                        graph.getVertex(v).getY());
                 showMap.getChildren().add(line);
             }
         }
 
-        // 搜索过的树进行高亮操作
+        //画箭头
         if (tree != null) {
             for(int i = 0; i < graph.getSize(); i++) {
                 if (tree.getParent(i) != -1) {
                     // 进行图形的重绘
                     int v = tree.getParent(i);
-                    double x1 = graph.getVertex(i).getX();
-                    double y1 = graph.getVertex(i).getY();
-                    double x2 = graph.getVertex(v).getX();
-                    double y2 = graph.getVertex(v).getY();
+
                     // 划线
-                    drawingArrowhead(x2, y2, x1, y1, showMap);
+                    drawingArrowhead(graph.getVertex(v).getX(),
+                            graph.getVertex(v).getY(),
+                            graph.getVertex(i).getX(),
+                            graph.getVertex(i).getY(),
+                            showMap);
                 }
             }
 
@@ -85,12 +83,13 @@ public class DrawWeightGraph {
     protected void drawingArrowhead(double x1, double y1, double x2, double y2, Pane pane){
 
         Line line = new Line(x1, y1, x2, y2);
+        line.setStrokeWidth(3);//设置线的宽度
         line.setFill(Color.RED);
         line.setStroke(Color.RED);
         pane.getChildren().add(line);
 
         // 斜率
-        double slope = ((((double) y1) - (double) y2)) / (((double) x1) - (((double) x2)));
+        double slope = (y1 -  y2) / (x1 -  x2);
 
         double arctan = Math.atan(slope);
 
@@ -110,6 +109,9 @@ public class DrawWeightGraph {
         Line line1 = new Line(x2, y2, (x2 + (Math.cos(arctan + set45) * arrlen)), ((y2)) + (Math.sin(arctan + set45) * arrlen));
         Line line2 = new Line(x2, y2, (x2 + (Math.cos(arctan - set45) * arrlen)), ((y2)) + (Math.sin(arctan - set45) * arrlen));
 
+
+        line1.setStrokeWidth(3);//设置线的宽度
+        line2.setStrokeWidth(3);//设置线的宽度
         line1.setStroke(Color.RED);
         line2.setStroke(Color.RED);
         // 在线上加箭头

@@ -4,30 +4,18 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.text.Text;
-import subject_4.main.version_3.model.City;
-import subject_4.main.version_3.model.USMap;
 import util.graph.AbstractGraph;
-import util.graph.Graph;
 
 
 import java.net.URL;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * Author: Zhou Xianghui
  * Time: 2017/12/18 15:09
- * Description:
+ * Description: 绘制加权图
  */
 public class Graph1Controller implements Initializable{
 
@@ -37,7 +25,7 @@ public class Graph1Controller implements Initializable{
     @FXML
     private JFXTextField startCity;
 
-    DrawWeightGraph drawWeightGraph = new DrawWeightGraph();
+    DrawUnweighedtGraph drawWeightGraph = new DrawUnweighedtGraph();
     AbstractGraph.Tree tree;
 
     @Override

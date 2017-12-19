@@ -3,6 +3,8 @@ package subject_4.main.version_3.model;
 import javafx.scene.layout.Pane;
 import util.graph.WeightedGraph;
 
+import java.util.HashMap;
+
 /**
  * Author: Zhou Xianghui
  * Time: 2017/12/18 21:59
@@ -41,5 +43,17 @@ public class WeightedUSMap {
 
     public void loadMap(Pane pane){
 
+    }
+
+    public HashMap<String, City> useNameFindCity = new HashMap<>();
+
+    public void initialUseNameFindCity(){
+        for (int i = 0; i < vertices.length; i++) {
+            useNameFindCity.put(vertices[i].getName(), vertices[i]);
+        }
+    }
+
+    public WeightedUSMap() {
+        initialUseNameFindCity();
     }
 }
