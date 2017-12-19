@@ -10,5 +10,5 @@
 --------------------------
 [5 农夫过河问题](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_5)
 -------------------------
-6 迷宫问题
+[6 迷宫问题](https://github.com/fankaljead/Curriculum-design-of-data-structure/tree/master/src/subject_6)
 ------------------------
