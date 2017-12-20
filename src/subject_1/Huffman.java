@@ -304,7 +304,7 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
         private FileOutputStream output;
         private int value;
         private int count = 0;
-        private int mask = 1; // The bits are all zeros except the last one
+        private int mask = 1;
 
         public BitOutputStream(File file) throws IOException {
             output = new FileOutputStream(file);
@@ -328,7 +328,6 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
                 writeBit(bitString.charAt(i));
         }
 
-        /** Write the last byte and close the stream. If the last byte is not full, right-shfit with zeros */
         public void close() throws IOException {
             if (count > 0) {
                 value = value << (8 - count);
