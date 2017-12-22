@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.stage.*?>
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 <!--哈夫曼编码视图-->
 
-<?import javafx.scene.canvas.Canvas?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="subject_1.HuffmanController"
-            prefHeight="600.0" prefWidth="1700.0"
-            stylesheets="@HuffmanStyle.css"
-            styleClass="pane"
-            fx:id="pane">
+<BorderPane fx:id="pane" prefHeight="600.0" prefWidth="1700.0" styleClass="pane" stylesheets="@HuffmanStyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="subject_1.HuffmanController">
       <top>
-          <HBox styleClass="buttonTotal" fx:id="hbox" spacing="50">
-              <JFXButton fx:id="btInitial" text="初始化" styleClass="button" />
-              <JFXButton fx:id="btCode" text="编码" styleClass="button"/>
-              <JFXButton fx:id="btDecode" text="解码" styleClass="button"/>
-              <JFXButton fx:id="btPrint" text="打印代码" styleClass="button"/>
-              <JFXButton fx:id="btPrintTree" text="打印哈夫曼树" styleClass="button"/>
+          <HBox fx:id="hbox" spacing="50" styleClass="buttonTotal">
+              <JFXButton fx:id="btInitial" prefHeight="299.0" prefWidth="301.0" styleClass="button" text="初始化" />
+              <JFXButton fx:id="btCode" styleClass="button" text="编码" />
+              <JFXButton fx:id="btDecode" styleClass="button" text="解码" />
+              <JFXButton fx:id="btPrint" styleClass="button" text="打印代码" />
+              <JFXButton fx:id="btPrintTree" styleClass="button" text="打印哈夫曼树" />
           </HBox>
       </top>
 
       <left>
-          <JFXButton fx:id="filePick" text="请选择文件"/>
+          <JFXButton fx:id="filePick" text="请选择文件" />
 
 
       </left>
 
       <center>
-          <JFXTextArea fx:id="textArea" promptText="请输入需要解码的字符串"/>
+          <JFXTextArea fx:id="textArea" prefHeight="300.0" prefWidth="1344.0" promptText="请输入需要解码的字符串" />
       </center>
 
 

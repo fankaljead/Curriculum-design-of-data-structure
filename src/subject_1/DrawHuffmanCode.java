@@ -2,7 +2,6 @@ package subject_1;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -17,15 +16,16 @@ import javafx.stage.Stage;
  * Description:
  */
 public class DrawHuffmanCode extends Application{
-
+    private int radius = 30;//节点半径
+    private int vPane = 100;//节点垂直距离
     private Pane pane = new Pane();
-    private final int WIDTH = 900;
+    private final int WIDTH = 1500;
     private final int HEIGHT = 700;
     private Scene scene = new Scene(pane, WIDTH, HEIGHT);
     private Huffman huffman = new Huffman("the process");
-    private final int X = WIDTH/2;
-    private final int Y = 50;
-    public final int RADIUS = 50;
+    private final double X = WIDTH/2;
+    private final double Y = 50;
+    public final int RADIUS = 25;
     public final static double REAGAN_THREE = Math.sqrt(3);
     public final static double REAGAN_TWO = Math.sqrt(2);
 
@@ -37,7 +37,9 @@ public class DrawHuffmanCode extends Application{
     public void start(Stage primaryStage) throws Exception {
 
 
-        preorder(huffman.getTree().root);
+        if(huffman != null){
+            preorder(huffman.getTree().root);
+        }
         primaryStage.setTitle("打印哈夫曼树");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -46,94 +48,73 @@ public class DrawHuffmanCode extends Application{
 
     //前序遍历
     public void preorder(Huffman.HuffmanTree.TreeNode root){
+        preorder(root, X, Y, 300);
 
-        preorder(root, X, Y);
     }
 
-    public void preorder(Huffman.HuffmanTree.TreeNode root, double x, double y){
-        if(root == null){
-            return;
+
+
+    public void preorder(Huffman.HuffmanTree.TreeNode root, double x, double y, double hPane){
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(Color.WHITE);
+        Text text = new Text(x - 10, y + 4, root.weight + "");
+
+        pane.getChildren().addAll(circle, text);
+
+        //展示左节点的权重
+        if (root.left != null) {
+            connectLeftChild(pane, x - hPane, (int)y + vPane, x, (int)y);
+            preorder(root.left, x - hPane, y + vPane, hPane / 2);
+        }
+        //展示左节点的元素
+        if (root.left == null) {
+            Text text1 = new Text(x - 4, y + 2 * radius - 5, root.element + "");
+            pane.getChildren().add(text1);
         }
 
-//        if(flag){
-//            //添加root左边的边
-//            if(root.left != null){
-//                pane.getChildren().add(new Line(x - 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
-//                        x - 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
-//                pane.getChildren().add(new Text(x - RADIUS, y + REAGAN_THREE * RADIUS, "0"));
-//            }
-//
-//            //添加root右边的边
-//            if(root.right != null){
-////            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
-////            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
-//
-//                pane.getChildren().add(new Line(x + RADIUS/REAGAN_TWO, y + RADIUS/REAGAN_TWO,
-//                        x + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO, y + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO));//画左边的线
-//                pane.getChildren().add(new Text(x + REAGAN_THREE*RADIUS, y + REAGAN_THREE * RADIUS, "1"));
-//
-//            }
-//
-//            flag = false;
-//        }else {
-//            //添加root左边的边
-//            if(root.left != null){
-//                pane.getChildren().add(new Line(x - RADIUS/REAGAN_TWO, y + RADIUS/REAGAN_TWO,
-//                        x - 2 * RADIUS * REAGAN_THREE + RADIUS/REAGAN_TWO, y + 2 * RADIUS * REAGAN_THREE - RADIUS/REAGAN_TWO));//画左边的线
-//                pane.getChildren().add(new Text(x - REAGAN_THREE*RADIUS, y + REAGAN_THREE * RADIUS, "0"));
-//            }
-//
-//            //添加root右边的边
-//            if(root.right != null){
-////            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
-////            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
-//
-//                pane.getChildren().add(new Line(x + 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
-//                        x + 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
-//                pane.getChildren().add(new Text(x + RADIUS, y + REAGAN_THREE * RADIUS, "1"));
-//
-//            }
-//
-//            flag = true;
-//        }
-
-        //添加root左边的边
-        if(root.left != null){
-            pane.getChildren().add(new Line(x - 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
-                    x - 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
-            pane.getChildren().add(new Text(x - RADIUS, y + REAGAN_THREE * RADIUS, "0"));
+        //展示右节点的权重
+        if (root.right != null) {
+            connectRightChild(pane, x + hPane, (int)y + vPane, x, (int)y);
+            preorder(root.right, x + hPane, y +vPane, hPane / 2);
+        }
+        //展示右节点的元素
+        if (root.right == null) {
+            Text text1 = new Text(x - 4, y + 2 * radius - 5, root.element + "");
+            pane.getChildren().add(text1);
         }
 
-        //添加root右边的边
-        if(root.right != null){
-//            pane.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
-//            pane.getChildren().add(new Text(x + RADIUS, y + RADIUS, "1"));
-
-            pane.getChildren().add(new Line(x + 1.5*RADIUS, y + 1.5 * RADIUS * REAGAN_THREE,
-                    x + 0.5 * RADIUS, y + 0.5 * RADIUS * REAGAN_THREE));//画左边的线
-            pane.getChildren().add(new Text(x + RADIUS, y + REAGAN_THREE * RADIUS, "1"));
-
-        }
-
-        //添加root元素，一个圆形包含字符
-        if(root != null){
-            Circle c = new Circle(x, y, RADIUS);
-            c.setFill(Color.WHITE);
-            c.setStroke(Color.BLACK);
-            pane.getChildren().add(c);//画右边的线
-            String temp;
-            if(root.element == '\0'){
-                temp = root.weight + "";
-            }
-            else {
-                temp = root.element + "";
-            }
-
-            pane.getChildren().add(new Text(x , y , temp));
-
-            preorder(root.left, x - 2*RADIUS, y + 2*RADIUS * REAGAN_THREE);//
-            preorder(root.right, x + 2*RADIUS, y + 2*RADIUS * REAGAN_THREE);
-
-        }
     }
+
+    //连接右孩子
+    private void connectRightChild(Pane pane, double x1, int y1, double x2, int y2) {
+        double d = Math.sqrt(vPane * vPane + (x2 - x1) * (x2 - x1));
+        //起始坐标
+        int x11 = (int)(x1 + radius * (x2 - x1) / d);
+        int y11 = (int)(y1 - radius * vPane / d);
+        //结束坐标
+        int x21 = (int)(x2 - radius * (x2 - x1) / d);
+        int y21 = (int)(y2 + radius * vPane / d);
+
+        Line line = new Line(x11, y11, x21, y21);
+        Text text = new Text((x11 + x21) / 2 , (y11 + y21) / 2 + 2, "1");
+
+        pane.getChildren().addAll(line, text);
+    }
+
+    //连接左孩子
+    private void connectLeftChild(Pane pane, double x1, int y1, double x2, int y2) {
+        double d = Math.sqrt(vPane * vPane + (x2 - x1) * (x2 - x1));
+        //起始坐标
+        int x11 = (int)(x1 - radius * (x1 - x2) / d);
+        int y11 = (int)(y1 - radius * vPane / d);
+        //结束坐标
+        int x21 = (int)(x2 + radius * (x1 - x2) / d);
+        int y21 = (int)(y2 + radius * vPane / d);
+        Line line = new Line(x11, y11, x21, y21);
+        Text text = new Text((x11 + x21) / 2 , (y11 + y21) / 2 + 2, "0");
+
+        pane.getChildren().addAll(line, text);
+    }
+
 }

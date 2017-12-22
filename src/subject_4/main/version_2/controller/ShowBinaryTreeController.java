@@ -24,13 +24,13 @@ import java.util.ResourceBundle;
  */
 public class ShowBinaryTreeController implements Initializable {
 
-    public static final int RADIUS = 50;//圆的半径
-    public static final int START_X = 450;//根节点所在横坐标
-    public static final int START_Y = 70;//根节点所在纵坐标
+    public static final double START_X = 450;//根节点所在横坐标
+    public static final double START_Y = 70;//根节点所在纵坐标
 
     protected BinaryTree<Double> tree = new BinaryTree<>();//需要展示的二叉树
     protected JFXDialog dialog = new JFXDialog();//对话框
-
+    private int radius = 30;//节点半径
+    private int vPane = 100;//节点垂直距离
     @FXML
     protected JFXTextField enterKey;//输入
 
@@ -130,37 +130,72 @@ public class ShowBinaryTreeController implements Initializable {
 
     //前序遍历
     public void preOrder(BinaryTree.TreeNode root){
-        preOrder(root, START_X, START_Y);
+        preOrder(root, START_X, START_Y, 100);
     }
 
-    public void preOrder(BinaryTree.TreeNode root, int x, int y){
-        if(root == null){
-            return;
+    public void preOrder(BinaryTree.TreeNode root, double x, double y, double hPane){
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(Color.WHITE);
+        Text text = new Text(x - 10, y + 4, root.element + "");
+
+        showTree.getChildren().addAll(circle, text);
+
+        //展示左节点的权重
+        if (root.left != null) {
+            connectLeftChild(showTree, x - hPane, (int)y + vPane, x, (int)y);
+            preOrder(root.left, x - hPane, y + vPane, hPane / 2);
         }
+//        //展示左节点的元素
+//        if (root.left == null) {
+//            Text text1 = new Text(x - 4, y + 2 * radius - 5, root.element + "");
+//            showTree.getChildren().add(text1);
+//        }
 
-        //添加root左边的边
-        if(root.left != null){
-            showTree.getChildren().add(new Line(x - 2*RADIUS + RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x + RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画左边的线
+        //展示右节点的权重
+        if (root.right != null) {
+            connectRightChild(showTree, x + hPane, (int)y + vPane, x, (int)y);
+            preOrder(root.right, x + hPane, y +vPane, hPane / 2);
         }
+        //展示右节点的元素
+//        if (root.right == null) {
+//            Text text1 = new Text(x - 4, y + 2 * radius - 5, root.element + "");
+//            showTree.getChildren().add(text1);
+//        }
 
-        //添加root右边的边
-        if(root.right != null){
-            showTree.getChildren().add(new Line(x + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), y + 2*RADIUS - RADIUS/(Math.sqrt(RADIUS)), x - RADIUS/(Math.sqrt(RADIUS)), y + RADIUS/(Math.sqrt(RADIUS))));//画右边的线
-        }
-
-        //添加root元素，一个圆形包含字符
-        if(root != null){
-            Circle c = new Circle(x, y, RADIUS);
-            c.setFill(Color.WHITE);
-            c.setStroke(Color.BLACK);
-            showTree.getChildren().add(c);
-
-            showTree.getChildren().add(new Text(x , y ,  root.element + ""));
-
-            preOrder(root.left, x - 2*RADIUS, y + 2*RADIUS);//
-            preOrder(root.right, x + 2*RADIUS, y + 2*RADIUS);
-
-        }
     }
+
+    //连接右孩子
+    private void connectRightChild(Pane pane, double x1, int y1, double x2, int y2) {
+        double d = Math.sqrt(vPane * vPane + (x2 - x1) * (x2 - x1));
+        //起始坐标
+        int x11 = (int)(x1 + radius * (x2 - x1) / d);
+        int y11 = (int)(y1 - radius * vPane / d);
+        //结束坐标
+        int x21 = (int)(x2 - radius * (x2 - x1) / d);
+        int y21 = (int)(y2 + radius * vPane / d);
+
+        Line line = new Line(x11, y11, x21, y21);
+//            Text text = new Text((x11 + x21) / 2 - 6, (y11 + y21) / 2 - 4, "1");
+
+        pane.getChildren().addAll(line);
+    }
+
+    //连接左孩子
+    private void connectLeftChild(Pane pane, double x1, int y1, double x2, int y2) {
+        double d = Math.sqrt(vPane * vPane + (x2 - x1) * (x2 - x1));
+        //起始坐标
+        int x11 = (int)(x1 - radius * (x1 - x2) / d);
+        int y11 = (int)(y1 - radius * vPane / d);
+        //结束坐标
+        int x21 = (int)(x2 + radius * (x1 - x2) / d);
+        int y21 = (int)(y2 + radius * vPane / d);
+        Line line = new Line(x11, y11, x21, y21);
+//            Text text = new Text((x11 + x21) / 2 + 6, (y11 + y21) / 2 - 4, "0");
+
+        pane.getChildren().addAll(line);
+    }
+
+
 
 }
