@@ -109,7 +109,8 @@ public class Changer {
 
 
 
-    public static String changeCharsNumbersToExpression(char[] operators, int[] operands){
+    public static String
+    changeCharsNumbersToExpression(char[] operators, int[] operands){
         String expression = "";//最终的表达式
 
         LinkedList<String> queue = new LinkedList<>();

@@ -49,6 +49,7 @@ public class Points1Controller implements Initializable {
         bindBtStartEvents();
     }
 
+    //开始
     private void bindBtStartEvents() {
         btStart.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -59,6 +60,7 @@ public class Points1Controller implements Initializable {
 
     }
 
+    //输入
     @FXML
     private void btEnterAction(MouseEvent e){
         if(text.getText() == "" || text.getText().compareTo("") == 0 || points1 == null){

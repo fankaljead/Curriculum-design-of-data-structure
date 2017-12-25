@@ -159,7 +159,8 @@ public class TailGame implements ITailGame{
 
         //设置规则
         for (int i = 0; i < rules.size(); i++) {
-            flipACell(node, row + this.rules.get(i).getRowToNode(), column + this.rules.get(i).getColumnToNode());
+            flipACell(node, row + this.rules.get(i).getRowToNode(),
+                    column + this.rules.get(i).getColumnToNode());
         }
 
         return getIndex(node);

@@ -170,6 +170,7 @@ public class Points1 {
 
 
 
+    //穷举操作数
     public void setOperandAllOptions() {
         int length = factorial(cardNumber);
         operandAllOptions = new int[length][cardNumber];
