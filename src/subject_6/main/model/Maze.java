@@ -148,7 +148,7 @@ public class Maze implements Serializable{
 
 
     /**
-     * 使用递归找到出口
+     * 找到出口
      * @param mazeData
      * @param x
      * @param y

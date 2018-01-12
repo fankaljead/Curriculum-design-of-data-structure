@@ -15,7 +15,6 @@ public class Huffman implements Serializable { //实现Serializable接口可以�
     private String[] codes;//生成的哈夫曼编码
     private int[] counts;//每个哈夫曼编码的权重
     private HuffmanTree tree;//生成的哈夫曼树
-//    private TreeMap<String, Character> codesWithKey = new TreeMap<>(new CodeComparator());//按照哈夫曼编码的长度依次保存编码及对应字符
     private Map<Character, String> codesWithKey = new HashMap<>();//按照哈夫曼编码的长度依次保存编码及对应字符
 
 
